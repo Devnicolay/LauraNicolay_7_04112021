@@ -1,0 +1,30 @@
+header {
+  .nav-dropdown-container {
+    button {
+      color: white;
+      border: transparent;
+      border-radius: 0.3em;
+      height: 3em;
+      width: 8em;
+      margin-top: 1em;
+      .fa-chevron-down {
+        margin-left: 1em;
+      }
+    }
+  }
+  .nav-dropdown-ingredients {
+    button {
+      background-color: #3282f7;
+    }
+  }
+  .nav-dropdown-devices {
+    button {
+      background-color: #68d9a4;
+    }
+  }
+  .nav-dropdown-utensils {
+    button {
+      background-color: #ed6454;
+    }
+  }
+}

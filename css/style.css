@@ -1,0 +1,48 @@
+header .banner {
+  display: flex;
+  justify-content: center;
+}
+header .banner img {
+  width: 3.5em;
+  margin-left: 3em;
+}
+header .banner h1 {
+  font-size: 1.5em;
+  color: #d04f4f;
+}
+
+header .search-bar form {
+  background-color: #e7e7e7;
+}
+header .search-bar form #research {
+  background-color: #e7e7e7;
+  width: 92%;
+  border: none;
+}
+header .search-bar form .button {
+  border: none;
+  background-color: #e7e7e7;
+}
+
+header .nav-dropdown-container button {
+  color: white;
+  border: transparent;
+  border-radius: 0.3em;
+  height: 3em;
+  width: 8em;
+  margin-top: 1em;
+}
+header .nav-dropdown-container button .fa-chevron-down {
+  margin-left: 1em;
+}
+header .nav-dropdown-ingredients button {
+  background-color: #3282f7;
+}
+header .nav-dropdown-devices button {
+  background-color: #68d9a4;
+}
+header .nav-dropdown-utensils button {
+  background-color: #ed6454;
+}
+
+/*# sourceMappingURL=style.css.map */

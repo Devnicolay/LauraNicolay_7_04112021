@@ -1,0 +1,20 @@
+{
+  "name": "les-petits-plats",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "sass": "sass --watch ./sass/main.scss:./css/style.css",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Devnicolay/LauraNicolay_7_04112021.git"
+  },
+  "author": "Nicolay Laura",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Devnicolay/LauraNicolay_7_04112021/issues"
+  },
+  "homepage": "https://github.com/Devnicolay/LauraNicolay_7_04112021#readme"
+}
