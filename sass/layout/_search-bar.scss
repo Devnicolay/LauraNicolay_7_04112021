@@ -1,0 +1,26 @@
+header {
+  .search-bar {
+    form {
+      background-color: $secondary;
+      border-radius: 0.3em;
+      height: 3em;
+      #research {
+        background-color: $secondary;
+        width: 92%;
+        border: none;
+        padding-left: 0.5em;
+        font-size: 0.9em;
+        outline: none;
+      }
+      .button {
+        border: none;
+        background-color: $secondary;
+        margin-left: 1.5em;
+        margin-top: 0.7em;
+        .fa-search {
+          font-size: 1.4em;
+        }
+      }
+    }
+  }
+}

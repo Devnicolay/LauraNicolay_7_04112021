@@ -14,17 +14,17 @@ header {
   }
   .nav-dropdown-ingredients {
     button {
-      background-color: #3282f7;
+      background-color: $ingredient-color;
     }
   }
   .nav-dropdown-devices {
     button {
-      background-color: #68d9a4;
+      background-color: $device-color;
     }
   }
   .nav-dropdown-utensils {
     button {
-      background-color: #ed6454;
+      background-color: $utensil-color;
     }
   }
 }

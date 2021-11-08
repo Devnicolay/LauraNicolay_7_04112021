@@ -1,3 +1,8 @@
-@import "./layout/banner.scss";
-@import "./layout/search-bar.scss";
-@import "./layout/nav.scss";
+@import "./utils/variable_overrides";
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+@import "./base/typography";
+
+@import "./layout/banner";
+@import "./layout/search-bar";
+@import "./layout/nav";
