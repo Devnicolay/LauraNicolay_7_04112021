@@ -1,0 +1,38 @@
+main {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3em;
+  article {
+    max-width: 20em;
+    max-height: 20em;
+    background-color: $secondary;
+    border-radius: 0.3em;
+    overflow: hidden;
+    .picture {
+      background-color: #c7bebe;
+      height: 10em;
+      border-radius: 0.3em 0.3em 0 0;
+    }
+    .name-and-time,
+    .ingredients-and-description {
+      display: flex;
+      justify-content: space-between;
+      padding: 1em;
+    }
+    .name-and-time {
+      h2 {
+        font-size: 1.12em;
+        color: $black;
+      }
+      p {
+        font-weight: bold;
+      }
+    }
+    .ingredients-and-description {
+      font-size: 0.7em;
+      .ingredients {
+        padding-right: 1em;
+      }
+    }
+  }
+}
