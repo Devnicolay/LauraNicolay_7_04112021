@@ -20,7 +20,7 @@ export class Recipes {
       `<article>
         <div class="picture"></div>
         <div class="name-and-time">
-            <h2>${this.name}</h2>
+            <h2 class="name" data-name="${this.name}">${this.name}</h2>
             <p><i class="far fa-clock"></i> ${this.time} min</p>
         </div>
         <div class="ingredients-and-description">
@@ -28,7 +28,7 @@ export class Recipes {
           ` +
       this.ingredients
         .map((ingredient) => {
-          return `<p>${ingredient}</p>`;
+          return `<p>${ingredient.ingredient}</p>`;
         })
         .join("") +
       ` </div>
