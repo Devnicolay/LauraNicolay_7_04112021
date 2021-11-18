@@ -12,6 +12,7 @@ class HomePage {
     recipes.forEach((recipe) => {
       new Recipes(recipe);
       new SearchBar(recipe);
+      new Ingredients(recipe);
     });
   }
 }

@@ -11176,6 +11176,9 @@ header .banner a h1, header .banner a .h1 {
   color: #d04f4f;
 }
 
+header .search-bar {
+  margin-bottom: 1em;
+}
 header .search-bar form {
   background-color: #e7e7e7;
   border-radius: 0.3em;
@@ -11205,13 +11208,33 @@ header .nav-dropdown-container button {
   border-radius: 0.3em;
   height: 3em;
   width: 8em;
-  margin-top: 1em;
 }
 header .nav-dropdown-container button .fa-chevron-down {
   margin-left: 1em;
 }
+header .nav-dropdown-ingredients,
+header .nav-dropdown-appliances,
+header .nav-dropdown-utensils {
+  margin: 0em 2em;
+}
+header .nav-dropdown-ingredients {
+  background-color: #3282f7;
+  border-radius: 0.3em;
+  max-height: 30em;
+  overflow: scroll;
+}
 header .nav-dropdown-ingredients button {
   background-color: #3282f7;
+}
+header .nav-dropdown-ingredients .nav-list-ingredients {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
+  gap: 0.5em 1em;
+}
+header .nav-dropdown-ingredients .nav-list-ingredients .li-ingredient {
+  color: white;
+  list-style: none;
 }
 header .nav-dropdown-appliances button {
   background-color: #68d9a4;

@@ -28,11 +28,11 @@ export class Recipes {
           ` +
       this.ingredients
         .map((ingredient) => {
-          return `<p>${ingredient.ingredient}</p>`;
+          return `<p class="ingredient" data-ingredient="${ingredient.ingredient}">${ingredient.ingredient} : ${ingredient.quantity} ${ingredient.unit}</p>`;
         })
         .join("") +
       ` </div>
-          <p class="description">${this.description}</p>
+          <p class="description" data-description="${this.description}">${this.description}</p>
         </div>
       </article>`;
   }

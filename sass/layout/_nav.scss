@@ -6,15 +6,33 @@ header {
       border-radius: 0.3em;
       height: 3em;
       width: 8em;
-      margin-top: 1em;
       .fa-chevron-down {
         margin-left: 1em;
       }
     }
   }
+  .nav-dropdown-ingredients,
+  .nav-dropdown-appliances,
+  .nav-dropdown-utensils {
+    margin: 0em 2em;
+  }
   .nav-dropdown-ingredients {
+    background-color: $ingredient-color;
+    border-radius: 0.3em;
+    max-height: 30em;
+    overflow: scroll;
     button {
       background-color: $ingredient-color;
+    }
+    .nav-list-ingredients {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: 1fr;
+      gap: 0.5em 1em;
+      .li-ingredient {
+        color: white;
+        list-style: none;
+      }
     }
   }
   .nav-dropdown-appliances {
