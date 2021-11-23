@@ -1,0 +1,18 @@
+.tags-container {
+  .tags {
+    background-color: $ingredient-color;
+    color: white;
+    border-radius: 0.3em;
+    padding: 0.5em 1em;
+    max-width: 8em;
+    display: flex;
+    justify-content: center;
+    p {
+      margin-bottom: 0;
+    }
+    .fa-times-circle {
+      font-size: 1.2em;
+      padding: 0.1em 0em 0em 0.5em;
+    }
+  }
+}

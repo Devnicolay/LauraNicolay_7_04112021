@@ -32,12 +32,25 @@ export class SearchBar {
     const valueInput = searchBar.value.toLowerCase();
     const recipesFiltered = [];
     for (let i = 0; i < recipes.length; i++) {
-      const hasTheWantedSearch = recipes[i].name
+      const hasTheWantedName = recipes[i].name
         .toLowerCase()
         .includes(valueInput);
-      if (hasTheWantedSearch) {
-        recipesFiltered.push(recipes[i]);
-        this.displayRecipesFiltered(recipesFiltered);
+      const ingredients = recipes[i].ingredients;
+      for (let i = 0; i < ingredients.length; i++) {
+        const hasTheWantedIngredient = ingredients[i].ingredient
+          .toLowerCase()
+          .includes(valueInput);
+        const hasTheWantedDescription = recipes[i].description
+          .toLowerCase()
+          .includes(valueInput);
+        if (
+          hasTheWantedName ||
+          hasTheWantedIngredient ||
+          hasTheWantedDescription
+        ) {
+          recipesFiltered.push(recipes[i]);
+          this.displayRecipesFiltered(recipesFiltered);
+        }
       }
     }
   }
@@ -52,10 +65,6 @@ export class SearchBar {
     // For each filtered recipes
     for (let i = 0; i < recipesFiltered.length; i++) {
       const recipesCard = document.querySelectorAll("main article"); // Recipes cards in the DOM
-      // for each recipes cards in the DOM
-      for (let i = 0; i < recipesCard.length; i++) {
-        recipesCard[i].style.display = "none"; // not display all the recipes cards in the DOM
-      }
       /**
        * Filter with name of recipes
        */
@@ -67,7 +76,12 @@ export class SearchBar {
         const nameValue = nameRecipesCard[i].getAttribute("data-name");
         // If the name of the filtered recipes is the same as the value of one of the recipes
         if (nameRecipesFiltered == nameValue) {
-          recipesCard[i].style.display = "block"; // display recipes
+          // for each recipes cards in the DOM
+          for (let i = 0; i < recipesCard.length; i++) {
+            recipesCard[i].style.display = "block"; // display recipes
+          }
+        } else {
+          recipesCard[i].style.display = "none"; // not display all the recipes cards in the DOM
         }
       }
       /**

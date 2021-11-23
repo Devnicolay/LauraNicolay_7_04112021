@@ -4,9 +4,12 @@ header {
       color: white;
       border: transparent;
       border-radius: 0.3em;
-      height: 3em;
       width: 8em;
+      margin-top: 1em;
       .fa-chevron-down {
+        margin-left: 1em;
+      }
+      .fa-chevron-up {
         margin-left: 1em;
       }
     }
@@ -15,34 +18,66 @@ header {
   .nav-dropdown-appliances,
   .nav-dropdown-utensils {
     margin: 0em 2em;
-  }
-  .nav-dropdown-ingredients {
-    background-color: $ingredient-color;
     border-radius: 0.3em;
-    max-height: 30em;
+    max-height: 4em;
     overflow: scroll;
     button {
-      background-color: $ingredient-color;
+      display: flex;
+      #search-ingredients,
+      #search-appliances,
+      #search-utensils {
+        border: none;
+        display: none;
+        color: white;
+      }
+      #search-ingredients::placeholder,
+      #search-appliances::placeholder,
+      #search-utensils::placeholder {
+        color: white;
+        opacity: 0.5;
+      }
     }
-    .nav-list-ingredients {
+    .nav-list-ingredients,
+    .nav-list-appliances,
+    .nav-list-utensils {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
       grid-template-rows: 1fr;
       gap: 0.5em 1em;
-      .li-ingredient {
+      .li-ingredient,
+      .li-appliances,
+      .li-utensils {
         color: white;
         list-style: none;
+        cursor: pointer;
+      }
+    }
+  }
+  .nav-dropdown-ingredients {
+    background-color: $ingredient-color;
+    button {
+      background-color: $ingredient-color;
+      #search-ingredients {
+        background-color: $ingredient-color;
       }
     }
   }
   .nav-dropdown-appliances {
+    background-color: $appliance-color;
     button {
       background-color: $appliance-color;
+      #search-appliances {
+        background-color: $appliance-color;
+      }
     }
   }
   .nav-dropdown-utensils {
+    background-color: $utensil-color;
     button {
       background-color: $utensil-color;
+      #search-utensils {
+        background-color: $utensil-color;
+      }
     }
   }
 }

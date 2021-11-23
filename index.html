@@ -26,25 +26,32 @@
                     <button class="button" id="button-search"><i class="fas fa-search"></i></button>
                 </form>
             </div>
+            <div class="tags-container"></div>
             <nav class="navbar navbar-expand">
                 <div class="row nav-dropdown-container">
                     <div class="col nav-dropdown-ingredients">
-                        <button class="button-ingredients" aria-haspopup="listbox" aria-expanded="false" aria-label="Liste déroulante pour ajouter des ingrédients">
-                            Ingrédients<span class="arrow-ingredients"><span class="fas fa-chevron-down"></span></span>
+                        <button class="button-tags" id="button-ingredients" data-name="Ingredients" aria-haspopup="listbox" aria-expanded="false" aria-label="Liste déroulante pour ajouter des ingrédients">
+                            <label for="search-ingredients" class="label-tag" id="label-ingredients">Ingrédients</label>
+                            <input id="search-ingredients" class="input-tag" type="text" placeholder="Recherche un ingrédient">
+                            <span class="arrow-ingredients"><span class="fas fa-chevron-down"></span></span>
                         </button>
-                        <ul class="nav-list-ingredients">
+                        <ul class="nav-list-ingredients" role="listbox">
                         </ul>
                     </div>
                     <div class="col nav-dropdown-appliances">
-                        <button class="button-appliances" aria-haspopup="listbox" aria-expanded="false" aria-label="Liste déroulante pour ajouter des appareils">
-                            Appareils<span class="arrow-appliances"><span class="fas fa-chevron-down"></span></span>
+                        <button class="button-tags" id="button-appliances" data-name="Appliances" aria-haspopup="listbox" aria-expanded="false" aria-label="Liste déroulante pour ajouter des appareils">
+                            <label for="search-appliances" class="label-tag" id="label-appliances">Appareils</label>
+                            <input id="search-appliances" class="input-tag" type="text" placeholder="Recherche un appareil">
+                            <span class="arrow-appliances"><span class="fas fa-chevron-down"></span></span>
                         </button>
                         <ul class="nav-list-appliances">
                         </ul>
                     </div>
                     <div class="col nav-dropdown-utensils">
-                        <button class="button-utensils" aria-haspopup="listbox" aria-expanded="false" aria-label="Liste déroulante pour ajouter des ustensiles">
-                            Ustensiles<span class="arrow-utensils"><span class="fas fa-chevron-down"></span></span>
+                        <button class="button-tags" id="button-utensils" data-name="Utensils" aria-haspopup="listbox" aria-expanded="false" aria-label="Liste déroulante pour ajouter des ustensiles">
+                            <label for="search-utensils" class="label-tag" id="label-utensils">Ustensiles</label>
+                            <input id="search-utensils" class="input-tag" type="text" placeholder="Recherche un ustensile">
+                            <span class="arrow-utensils"><span class="fas fa-chevron-down"></span></span>
                         </button>
                         <ul class="nav-list-utensils">
                         </ul>

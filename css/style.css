@@ -11206,40 +11206,123 @@ header .nav-dropdown-container button {
   color: white;
   border: transparent;
   border-radius: 0.3em;
-  height: 3em;
   width: 8em;
+  margin-top: 1em;
 }
 header .nav-dropdown-container button .fa-chevron-down {
+  margin-left: 1em;
+}
+header .nav-dropdown-container button .fa-chevron-up {
   margin-left: 1em;
 }
 header .nav-dropdown-ingredients,
 header .nav-dropdown-appliances,
 header .nav-dropdown-utensils {
   margin: 0em 2em;
-}
-header .nav-dropdown-ingredients {
-  background-color: #3282f7;
   border-radius: 0.3em;
-  max-height: 30em;
+  max-height: 4em;
   overflow: scroll;
 }
-header .nav-dropdown-ingredients button {
-  background-color: #3282f7;
+header .nav-dropdown-ingredients button,
+header .nav-dropdown-appliances button,
+header .nav-dropdown-utensils button {
+  display: flex;
 }
-header .nav-dropdown-ingredients .nav-list-ingredients {
+header .nav-dropdown-ingredients button #search-ingredients,
+header .nav-dropdown-ingredients button #search-appliances,
+header .nav-dropdown-ingredients button #search-utensils,
+header .nav-dropdown-appliances button #search-ingredients,
+header .nav-dropdown-appliances button #search-appliances,
+header .nav-dropdown-appliances button #search-utensils,
+header .nav-dropdown-utensils button #search-ingredients,
+header .nav-dropdown-utensils button #search-appliances,
+header .nav-dropdown-utensils button #search-utensils {
+  border: none;
+  display: none;
+  color: white;
+}
+header .nav-dropdown-ingredients button #search-ingredients::placeholder,
+header .nav-dropdown-ingredients button #search-appliances::placeholder,
+header .nav-dropdown-ingredients button #search-utensils::placeholder,
+header .nav-dropdown-appliances button #search-ingredients::placeholder,
+header .nav-dropdown-appliances button #search-appliances::placeholder,
+header .nav-dropdown-appliances button #search-utensils::placeholder,
+header .nav-dropdown-utensils button #search-ingredients::placeholder,
+header .nav-dropdown-utensils button #search-appliances::placeholder,
+header .nav-dropdown-utensils button #search-utensils::placeholder {
+  color: white;
+  opacity: 0.5;
+}
+header .nav-dropdown-ingredients .nav-list-ingredients,
+header .nav-dropdown-ingredients .nav-list-appliances,
+header .nav-dropdown-ingredients .nav-list-utensils,
+header .nav-dropdown-appliances .nav-list-ingredients,
+header .nav-dropdown-appliances .nav-list-appliances,
+header .nav-dropdown-appliances .nav-list-utensils,
+header .nav-dropdown-utensils .nav-list-ingredients,
+header .nav-dropdown-utensils .nav-list-appliances,
+header .nav-dropdown-utensils .nav-list-utensils {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr;
   gap: 0.5em 1em;
 }
-header .nav-dropdown-ingredients .nav-list-ingredients .li-ingredient {
+header .nav-dropdown-ingredients .nav-list-ingredients .li-ingredient,
+header .nav-dropdown-ingredients .nav-list-ingredients .li-appliances,
+header .nav-dropdown-ingredients .nav-list-ingredients .li-utensils,
+header .nav-dropdown-ingredients .nav-list-appliances .li-ingredient,
+header .nav-dropdown-ingredients .nav-list-appliances .li-appliances,
+header .nav-dropdown-ingredients .nav-list-appliances .li-utensils,
+header .nav-dropdown-ingredients .nav-list-utensils .li-ingredient,
+header .nav-dropdown-ingredients .nav-list-utensils .li-appliances,
+header .nav-dropdown-ingredients .nav-list-utensils .li-utensils,
+header .nav-dropdown-appliances .nav-list-ingredients .li-ingredient,
+header .nav-dropdown-appliances .nav-list-ingredients .li-appliances,
+header .nav-dropdown-appliances .nav-list-ingredients .li-utensils,
+header .nav-dropdown-appliances .nav-list-appliances .li-ingredient,
+header .nav-dropdown-appliances .nav-list-appliances .li-appliances,
+header .nav-dropdown-appliances .nav-list-appliances .li-utensils,
+header .nav-dropdown-appliances .nav-list-utensils .li-ingredient,
+header .nav-dropdown-appliances .nav-list-utensils .li-appliances,
+header .nav-dropdown-appliances .nav-list-utensils .li-utensils,
+header .nav-dropdown-utensils .nav-list-ingredients .li-ingredient,
+header .nav-dropdown-utensils .nav-list-ingredients .li-appliances,
+header .nav-dropdown-utensils .nav-list-ingredients .li-utensils,
+header .nav-dropdown-utensils .nav-list-appliances .li-ingredient,
+header .nav-dropdown-utensils .nav-list-appliances .li-appliances,
+header .nav-dropdown-utensils .nav-list-appliances .li-utensils,
+header .nav-dropdown-utensils .nav-list-utensils .li-ingredient,
+header .nav-dropdown-utensils .nav-list-utensils .li-appliances,
+header .nav-dropdown-utensils .nav-list-utensils .li-utensils {
   color: white;
   list-style: none;
+  cursor: pointer;
+}
+header .nav-dropdown-ingredients {
+  background-color: #3282f7;
+}
+header .nav-dropdown-ingredients button {
+  background-color: #3282f7;
+}
+header .nav-dropdown-ingredients button #search-ingredients {
+  background-color: #3282f7;
+}
+header .nav-dropdown-appliances {
+  background-color: #68d9a4;
 }
 header .nav-dropdown-appliances button {
   background-color: #68d9a4;
 }
+header .nav-dropdown-appliances button #search-appliances {
+  background-color: #68d9a4;
+}
+header .nav-dropdown-utensils {
+  background-color: #ed6454;
+}
 header .nav-dropdown-utensils button {
+  background-color: #ed6454;
+}
+header .nav-dropdown-utensils button #search-utensils {
   background-color: #ed6454;
 }
 
@@ -11278,6 +11361,23 @@ main article .ingredients-and-description {
 }
 main article .ingredients-and-description .ingredients {
   padding-right: 1em;
+}
+
+.tags-container .tags {
+  background-color: #3282f7;
+  color: white;
+  border-radius: 0.3em;
+  padding: 0.5em 1em;
+  max-width: 8em;
+  display: flex;
+  justify-content: center;
+}
+.tags-container .tags p {
+  margin-bottom: 0;
+}
+.tags-container .tags .fa-times-circle {
+  font-size: 1.2em;
+  padding: 0.1em 0em 0em 0.5em;
 }
 
 /*# sourceMappingURL=style.css.map */
