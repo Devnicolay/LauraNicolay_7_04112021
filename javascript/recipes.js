@@ -2,7 +2,6 @@ import { recipes } from "./data_recipes/recipes_data.js";
 
 export class Recipes {
   constructor(recipes) {
-    this.recipes = recipes;
     this.id = recipes.id;
     this.name = recipes.name;
     this.servings = recipes.servings;
@@ -11,12 +10,7 @@ export class Recipes {
     this.description = recipes.description;
     this.appliance = recipes.appliance;
     this.utensils = recipes.ustensils;
-    this.initListeners();
-  }
-
-  initListeners() {
     this.createHtmlRecipes();
-    this.IfNotUnitOfQuantity();
   }
 
   /**
@@ -25,7 +19,7 @@ export class Recipes {
   createHtmlRecipes() {
     const mainRecipes = document.querySelector("main");
     mainRecipes.innerHTML +=
-      `<article>
+      `<article data-id="${this.id}">
         <div class="picture"></div>
         <div class="name-and-time">
             <h2 class="name" data-name="${this.name}">${this.name}</h2>
@@ -36,26 +30,17 @@ export class Recipes {
           ` +
       this.ingredients
         .map((ingredient) => {
-          return `<p class="ingredient" data-ingredient="${ingredient.ingredient}">${ingredient.ingredient} : ${ingredient.quantity} <span class="unit" data-unit="${ingredient.unit}">${ingredient.unit}</span></p>`;
+          const unitHtml = ingredient.unit
+            ? `<span class="unit" data-unit="${ingredient.unit}">${ingredient.unit}</span>`
+            : "";
+          return `<p class="ingredient" data-ingredient="${ingredient.ingredient.toLowerCase()}">${
+            ingredient.ingredient
+          } : ${ingredient.quantity} ${unitHtml}</p>`;
         })
         .join("") +
       ` </div>
           <p class="description" data-description="${this.description}">${this.description}</p>
         </div>
       </article>`;
-  }
-
-  /**
-   * If there is no unit of quantity in the ingredient, do not display unit in the recipe card
-   */
-  IfNotUnitOfQuantity() {
-    const units = document.querySelectorAll(".ingredient .unit");
-    units.forEach((unit) => {
-      const dataUnit = unit.getAttribute("data-unit");
-      if (dataUnit === "undefined") {
-        console.log("null");
-        unit.innerHTML += `.`;
-      }
-    });
   }
 }

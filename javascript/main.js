@@ -9,8 +9,8 @@ import { Ingredient } from "./search_tags.js";
 class HomePage {
   static initHomePage() {
     // Display recipes
-    recipes.forEach((recipe) => {
-      new Recipes(recipe);
+    const recipess = recipes.map((recipe) => {
+      return new Recipes(recipe);
     });
     new Ingredient(recipes);
     new SearchBar(recipes);
