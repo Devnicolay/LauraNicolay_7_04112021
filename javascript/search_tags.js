@@ -107,7 +107,6 @@ export class Ingredient {
     );
     liIngredient.forEach((ingredient) => {
       const dataIngredient = ingredient.getAttribute("data-ingredient");
-      console.log(dataIngredient);
       if (dataIngredient.includes(valueInputIngredient)) {
         ingredient.style.display = "block";
       } else {
@@ -152,8 +151,21 @@ export class Ingredient {
    * Add ingredient in bubble tag
    */
   createHtmlTagsIngredient(dataIngredientClicked) {
-    tagsContainer.innerHTML = `<div class="tags" data-tag="${dataIngredientClicked}"><p>${dataIngredientClicked}</p><i class="far fa-times-circle"></i></div>`;
+    tagsContainer.innerHTML += `<div class="tags" data-tag="${dataIngredientClicked}"><p>${dataIngredientClicked}</p><i class="far fa-times-circle" data-ingredient="${dataIngredientClicked}"></i></div>`;
     this.displayRecipesFilteredByIngredient();
+    const tags = document.querySelectorAll(".tags");
+    tags.forEach((tag) => {
+      const dataTag = tag.getAttribute("data-tag");
+      const crossTag = document.querySelectorAll(".fa-times-circle");
+      crossTag.forEach((cross) => {
+        const dataCross = cross.getAttribute("data-ingredient");
+        cross.addEventListener("click", () => {
+          if (dataCross == dataTag) {
+            tag.style.display = "none";
+          }
+        });
+      });
+    });
   }
 
   /**
