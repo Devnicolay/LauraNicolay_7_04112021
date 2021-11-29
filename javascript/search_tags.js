@@ -31,9 +31,11 @@ export class Ingredient {
     inputIngredients.addEventListener("blur", () => this.undisplayInput());
     inputIngredients.addEventListener("keydown", (e) => {
       if (e.target.value.length >= 3) {
-        this.displayRecipesFilteredBySearchBarIngredient();
+        const searchBarIngredient =
+          document.getElementById("search-ingredients");
+        const valueInputIngredient = searchBarIngredient.value.toLowerCase();
+        this.displayRecipesFilteredByIngredient(valueInputIngredient);
         ulIngredients.innerHTML = "";
-        const valueInputIngredient = inputIngredients.value.toLowerCase();
         this.filterIngredientInDropdown(valueInputIngredient);
       }
     });
@@ -65,10 +67,17 @@ export class Ingredient {
     let ingredientsUnduplicated = new Set();
 
     recipes.forEach((recipe) => {
+      const recipeDom = document.querySelector(
+        `article[data-id="${recipe.id}"]`
+      );
+      recipeDom.style.display = "block";
       recipe.ingredients.forEach((ingredient) => {
-        ingredientsUnduplicated.add(ingredient.ingredient.toLowerCase());
+        if (recipeDom.style.display === "block") {
+          ingredientsUnduplicated.add(ingredient.ingredient);
+        }
       });
     });
+
     ingredientsUnduplicated = Array.from(ingredientsUnduplicated);
     this.createListIngredientsHtml(ingredientsUnduplicated);
     const liIngredient = Array.from(
@@ -90,6 +99,12 @@ export class Ingredient {
     buttonIngredients.setAttribute("aria-expanded", "false");
     chevronIngredients.innerHTML = `<span class="fas fa-chevron-down"></span>`;
     ulIngredients.innerHTML = ``;
+    const chevronDownIngredients = document.querySelector(
+      ".arrow-ingredients .fa-chevron-down"
+    );
+    chevronDownIngredients.addEventListener("click", () =>
+      this.openListOfIngredients()
+    );
   }
 
   /**
@@ -133,7 +148,7 @@ export class Ingredient {
     const ulIngredients = document.querySelector(".nav-list-ingredients");
     ulIngredients.innerHTML += ingredients
       .map((ingredient) => {
-        return `<li class="li-ingredient" data-ingredient="${ingredient.toLowerCase()}">${ingredient}</li>`;
+        return `<li class="li-ingredient" data-ingredient="${ingredient}">${ingredient}</li>`;
       })
       .join("");
     chevronIngredients.innerHTML = `<span class="fas fa-chevron-up"></span>`;
@@ -143,6 +158,10 @@ export class Ingredient {
     chevronUpIngredients.addEventListener("click", () =>
       this.closeListOfIngredients()
     );
+    ulIngredients.focus();
+    ulIngredients.addEventListener("blur", () => {
+      this.closeListOfIngredients();
+    });
   }
 
   /**
@@ -151,11 +170,11 @@ export class Ingredient {
    * Add ingredient in bubble tag
    */
   createHtmlTagsIngredient(dataIngredientClicked) {
-    tagsContainer.innerHTML += `<div class="tags" data-tag="${dataIngredientClicked}"><p>${dataIngredientClicked}</p><i class="far fa-times-circle" data-ingredient="${dataIngredientClicked}"></i></div>`;
-    this.displayRecipesFilteredByIngredient();
+    tagsContainer.innerHTML += `<div class="tags" data-tag="${dataIngredientClicked.toLowerCase()}"><p>${dataIngredientClicked}</p><i class="far fa-times-circle" data-ingredient="${dataIngredientClicked}"></i></div>`;
     const tags = document.querySelectorAll(".tags");
     tags.forEach((tag) => {
       const dataTag = tag.getAttribute("data-tag");
+      this.displayRecipesFilteredByIngredient(dataTag);
       const crossTag = document.querySelectorAll(".fa-times-circle");
       crossTag.forEach((cross) => {
         const dataCross = cross.getAttribute("data-ingredient");
@@ -169,40 +188,13 @@ export class Ingredient {
   }
 
   /**
-   * Display recipes with ingredient enter in input
+   *
    */
-  displayRecipesFilteredBySearchBarIngredient() {
-    const searchBarIngredient = document.getElementById("search-ingredients");
-    const valueInputIngredient = searchBarIngredient.value.toLowerCase();
-
-    recipes.forEach((recipe) => {
-      const recipeDom = document.querySelector(
-        `article[data-id="${recipe.id}"]`
-      );
-      let hasTheWantedIngredient = false;
-      recipe.ingredients.forEach((ingredient) => {
-        const ingredientfound = ingredient.ingredient
-          .toLowerCase()
-          .includes(valueInputIngredient);
-        if (ingredientfound) {
-          hasTheWantedIngredient = true;
-        }
-        if (hasTheWantedIngredient) {
-          recipeDom.style.display = "block";
-        } else {
-          recipeDom.style.display = "none";
-        }
-      });
-    });
-  }
 
   /**
-   * Display recipes with tag ingredient
+   * Display filtered recipes with the search input for ingredients or selected the ingredient in dropdown list
    */
-  displayRecipesFilteredByIngredient() {
-    const tags = document.querySelector(".tags");
-    const dataTags = tags.getAttribute("data-tag");
-
+  displayRecipesFilteredByIngredient(matchedIngredient) {
     recipes.forEach((recipe) => {
       const recipeDom = document.querySelector(
         `article[data-id="${recipe.id}"]`
@@ -211,7 +203,7 @@ export class Ingredient {
       recipe.ingredients.forEach((ingredient) => {
         const ingredientfound = ingredient.ingredient
           .toLowerCase()
-          .includes(dataTags);
+          .includes(matchedIngredient);
         if (ingredientfound) {
           hasTheWantedIngredient = true;
         }
