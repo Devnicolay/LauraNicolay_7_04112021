@@ -30,7 +30,6 @@ export class SearchBar {
    */
   recipesFilteredWithInput() {
     const valueInput = searchBar.value.toLowerCase();
-    const recipesFiltered = [];
     for (let i = 0; i < recipes.length; i++) {
       const recipeDom = document.querySelector(
         `article[data-id="${recipes[i].id}"]`

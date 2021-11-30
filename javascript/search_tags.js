@@ -70,10 +70,9 @@ export class Ingredient {
       const recipeDom = document.querySelector(
         `article[data-id="${recipe.id}"]`
       );
-      recipeDom.style.display = "block";
       recipe.ingredients.forEach((ingredient) => {
         if (recipeDom.style.display === "block") {
-          ingredientsUnduplicated.add(ingredient.ingredient);
+          ingredientsUnduplicated.add(ingredient.ingredient.toLowerCase());
         }
       });
     });
@@ -177,7 +176,7 @@ export class Ingredient {
       this.displayRecipesFilteredByIngredient(dataTag);
       const crossTag = document.querySelectorAll(".fa-times-circle");
       crossTag.forEach((cross) => {
-        const dataCross = cross.getAttribute("data-ingredient");
+        const dataCross = cross.getAttribute("data-ingredient").toLowerCase();
         cross.addEventListener("click", () => {
           if (dataCross == dataTag) {
             tag.style.display = "none";

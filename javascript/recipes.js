@@ -1,5 +1,3 @@
-import { recipes } from "./data_recipes/recipes_data.js";
-
 export class Recipes {
   constructor(recipes) {
     this.id = recipes.id;
@@ -42,5 +40,9 @@ export class Recipes {
           <p class="description" data-description="${this.description}">${this.description}</p>
         </div>
       </article>`;
+    const recipesDom = document.querySelectorAll("article");
+    recipesDom.forEach((recipe) => {
+      recipe.style.display = "block";
+    });
   }
 }
