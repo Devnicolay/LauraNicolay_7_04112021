@@ -1,22 +1,22 @@
-export class Recipes {
-  constructor(recipes) {
-    this.id = recipes.id;
-    this.name = recipes.name;
-    this.servings = recipes.servings;
-    this.ingredients = recipes.ingredients;
-    this.time = recipes.time;
-    this.description = recipes.description;
-    this.appliance = recipes.appliance;
-    this.utensils = recipes.ustensils;
-    this.createHtmlRecipes();
+export class Recipe {
+  constructor(recipe) {
+    this.id = recipe.id;
+    this.name = recipe.name;
+    this.servings = recipe.servings;
+    this.ingredients = recipe.ingredients;
+    this.time = recipe.time;
+    this.description = recipe.description;
+    this.appliance = recipe.appliance;
+    this.ustensils = recipe.ustensils;
+    this.createHtmlRecipe();
   }
 
   /**
    * Create HTML for recipes cards
    */
-  createHtmlRecipes() {
-    const mainRecipes = document.querySelector("main");
-    mainRecipes.innerHTML +=
+  createHtmlRecipe() {
+    const mainRecipe = document.querySelector("main");
+    mainRecipe.innerHTML +=
       `<article data-id="${this.id}">
         <div class="picture"></div>
         <div class="name-and-time">

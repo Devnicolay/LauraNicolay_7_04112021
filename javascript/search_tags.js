@@ -16,7 +16,8 @@ const tagsContainer = document.querySelector(".tags-container");
 
 export class Ingredient {
   constructor(recipes) {
-    this.recipe = recipes;
+    this.recipes = recipes;
+    console.log(this.recipes);
     this.initListeners();
   }
 
@@ -34,7 +35,6 @@ export class Ingredient {
         const searchBarIngredient =
           document.getElementById("search-ingredients");
         const valueInputIngredient = searchBarIngredient.value.toLowerCase();
-        this.displayRecipesFilteredByIngredient(valueInputIngredient);
         ulIngredients.innerHTML = "";
         this.filterIngredientInDropdown(valueInputIngredient);
       }
@@ -87,6 +87,7 @@ export class Ingredient {
         const dataIngredientClicked =
           ingredient.getAttribute("data-ingredient");
         this.createHtmlTagsIngredient(dataIngredientClicked);
+        this.displayRecipesFilteredByIngredient(dataIngredientClicked);
       });
     });
   }
@@ -169,49 +170,50 @@ export class Ingredient {
    * Add ingredient in bubble tag
    */
   createHtmlTagsIngredient(dataIngredientClicked) {
-    tagsContainer.innerHTML += `<div class="tags" data-tag="${dataIngredientClicked.toLowerCase()}"><p>${dataIngredientClicked}</p><i class="far fa-times-circle" data-ingredient="${dataIngredientClicked}"></i></div>`;
-    const tags = document.querySelectorAll(".tags");
-    tags.forEach((tag) => {
-      const dataTag = tag.getAttribute("data-tag");
-      this.displayRecipesFilteredByIngredient(dataTag);
-      const crossTag = document.querySelectorAll(".fa-times-circle");
-      crossTag.forEach((cross) => {
-        const dataCross = cross.getAttribute("data-ingredient").toLowerCase();
-        cross.addEventListener("click", () => {
-          if (dataCross == dataTag) {
-            tag.style.display = "none";
-          }
-        });
+    const tag = document.createElement("div");
+    tag.classList.add("tags");
+    tag.setAttribute("data-tag", `${dataIngredientClicked.toLowerCase()}`);
+    tag.innerHTML += `<p>${dataIngredientClicked}</p><i class="far fa-times-circle" data-ingredient="${dataIngredientClicked.toLowerCase()}"></i>`;
+    tagsContainer.appendChild(tag);
+    // Remove tag with cross of tag
+    const crossTag = document.querySelectorAll(".fa-times-circle");
+    crossTag.forEach((cross) => {
+      cross.addEventListener("click", () => {
+        const dataCross = cross.getAttribute("data-ingredient");
+        const dataTag = tag.getAttribute("data-tag");
+        if (dataCross == dataTag) {
+          tag.style.display = "none";
+        }
       });
     });
   }
 
   /**
-   *
-   */
-
-  /**
    * Display filtered recipes with the search input for ingredients or selected the ingredient in dropdown list
    */
   displayRecipesFilteredByIngredient(matchedIngredient) {
-    recipes.forEach((recipe) => {
-      const recipeDom = document.querySelector(
-        `article[data-id="${recipe.id}"]`
-      );
-      let hasTheWantedIngredient = false;
-      recipe.ingredients.forEach((ingredient) => {
-        const ingredientfound = ingredient.ingredient
-          .toLowerCase()
-          .includes(matchedIngredient);
-        if (ingredientfound) {
-          hasTheWantedIngredient = true;
-        }
-        if (hasTheWantedIngredient) {
-          recipeDom.style.display = "block";
-        } else {
-          recipeDom.style.display = "none";
-        }
+    console.log(this.recipes);
+    const arrayRecipes = Array.from(this.recipes);
+    console.log(arrayRecipes);
+    arrayRecipes.forEach((recipe) => {
+      const ingredients = recipe.querySelectorAll(".ingredient");
+      console.log(ingredients);
+      let allIngredients = [];
+      ingredients.forEach((ingredient) => {
+        const dataIngredient = ingredient.getAttribute("data-ingredient");
+        allIngredients.push(dataIngredient);
       });
+      const ingredientFound = allIngredients.some((ingredient) =>
+        ingredient.toUpperCase().includes(matchedIngredient.toUpperCase())
+      );
+      console.log(allIngredients);
+      console.log(ingredientFound);
+      if (ingredientFound) {
+        recipe.style.display = "block";
+        console.log(recipe);
+      } else {
+        recipe.style.display = "none";
+      }
     });
   }
 }

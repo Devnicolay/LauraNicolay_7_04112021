@@ -1,4 +1,5 @@
 import { recipes } from "./data_recipes/recipes_data.js";
+import { Ingredient } from "./search_tags.js";
 
 /**
  * DOM
@@ -8,7 +9,7 @@ const searchBar = document.getElementById("research");
 export class SearchBar {
   constructor(recipes) {
     this.recipes = recipes;
-    this.initListeners(recipes);
+    this.initListeners();
   }
 
   /**
@@ -29,6 +30,7 @@ export class SearchBar {
    * Launch displayRecipesFiltered() with filtered recipes in parameter
    */
   recipesFilteredWithInput() {
+    let arrayOfRecipesFiltered = [];
     const valueInput = searchBar.value.toLowerCase();
     for (let i = 0; i < recipes.length; i++) {
       const recipeDom = document.querySelector(
@@ -59,10 +61,13 @@ export class SearchBar {
         hasTheWantedDescription
       ) {
         recipeDom.style.display = "block";
+        arrayOfRecipesFiltered.push(recipeDom);
       } else {
         recipeDom.style.display = "none";
       }
     }
+    new Ingredient(arrayOfRecipesFiltered);
+    return arrayOfRecipesFiltered;
   }
 
   /**
