@@ -1,5 +1,5 @@
 import { recipes } from "./data_recipes/recipes_data.js";
-import { Ingredient } from "./search_tags.js";
+import { Tags } from "./search_tags.js";
 
 /**
  * DOM
@@ -66,7 +66,7 @@ export class SearchBar {
         recipeDom.style.display = "none";
       }
     }
-    new Ingredient(arrayOfRecipesFiltered);
+    new Tags(arrayOfRecipesFiltered);
     return arrayOfRecipesFiltered;
   }
 

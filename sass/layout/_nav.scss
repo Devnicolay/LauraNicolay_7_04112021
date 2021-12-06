@@ -44,9 +44,9 @@ header {
       grid-template-columns: 1fr 1fr 1fr;
       grid-template-rows: 1fr;
       gap: 0.5em 1em;
-      .li-ingredient,
-      .li-appliance,
-      .li-ustensil {
+      .li-ingredients,
+      .li-appliances,
+      .li-ustensils {
         color: white;
         list-style: none;
         cursor: pointer;
