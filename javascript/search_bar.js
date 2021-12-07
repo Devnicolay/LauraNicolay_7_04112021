@@ -1,5 +1,4 @@
 import { recipes } from "./data_recipes/recipes_data.js";
-import { Tags } from "./search_tags.js";
 
 /**
  * DOM
@@ -20,7 +19,7 @@ export class SearchBar {
       if (e.target.value.length >= 3) {
         this.recipesFilteredWithInput();
       } else {
-        this.refreshRecipes();
+        this.displayAllRecipes();
       }
     });
   }
@@ -66,14 +65,12 @@ export class SearchBar {
         recipeDom.style.display = "none";
       }
     }
-    new Tags(arrayOfRecipesFiltered);
-    return arrayOfRecipesFiltered;
   }
 
   /**
    * Display all recipes when the value of search input is less than 3 caracters
    */
-  refreshRecipes() {
+  displayAllRecipes() {
     for (let i = 0; i < recipes.length; i++) {
       const recipeDom = document.querySelector(
         `article[data-id="${recipes[i].id}"]`

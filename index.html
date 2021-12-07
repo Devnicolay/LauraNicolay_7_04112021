@@ -35,7 +35,7 @@
                             <input id="search-ingredients" class="input-tag" type="text" placeholder="Recherche un ingrédient">
                             <span class="arrow-ingredients"><span class="fas fa-chevron-down"></span></span>
                         </button>
-                        <ul class="nav-list-ingredients" role="listbox">
+                        <ul tabindex="1" class="nav-list-ingredients" role="listbox">
                         </ul>
                     </div>
                     <div class="col nav-dropdown-appliances">
@@ -44,7 +44,7 @@
                             <input id="search-appliances" class="input-tag" type="text" placeholder="Recherche un appareil">
                             <span class="arrow-appliances"><span class="fas fa-chevron-down"></span></span>
                         </button>
-                        <ul class="nav-list-appliances">
+                        <ul tabindex="1" class="nav-list-appliances">
                         </ul>
                     </div>
                     <div class="col nav-dropdown-ustensils">
@@ -53,13 +53,15 @@
                             <input id="search-ustensils" class="input-tag" type="text" placeholder="Recherche un ustensile">
                             <span class="arrow-ustensils"><span class="fas fa-chevron-down"></span></span>
                         </button>
-                        <ul class="nav-list-ustensils">
+                        <ul tabindex="1" class="nav-list-ustensils">
                         </ul>
                  </div>
                 </div>
             </nav>  
         </header>
         <main>
+            <section class="msg-error"></section>
+            <section class="part-recipes"></section>
         </main>
       </div>
       <script src="./javascript/main.js" type="module"></script>

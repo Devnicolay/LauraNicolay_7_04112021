@@ -11180,6 +11180,7 @@ header .search-bar {
   margin-bottom: 1em;
 }
 header .search-bar form {
+  display: flex;
   background-color: #e7e7e7;
   border-radius: 0.3em;
   height: 3em;
@@ -11326,45 +11327,57 @@ header .nav-dropdown-ustensils button #search-ustensils {
   background-color: #ed6454;
 }
 
-main {
+main .msg-error .msg-no-recipe {
+  font-size: 2em;
+  padding-top: 2em;
+}
+main .part-recipes {
   display: flex;
   flex-wrap: wrap;
   gap: 3em;
 }
-main article {
+main .part-recipes article {
   max-width: 20em;
   max-height: 20em;
   background-color: #e7e7e7;
   border-radius: 0.3em;
   overflow: hidden;
 }
-main article .picture {
+main .part-recipes article .picture {
   background-color: #c7bebe;
   height: 10em;
   border-radius: 0.3em 0.3em 0 0;
 }
-main article .name-and-time,
-main article .ingredients-and-description {
+main .part-recipes article .name-and-time,
+main .part-recipes article .ingredients-and-description {
   display: flex;
   justify-content: space-between;
   padding: 1em;
 }
-main article .name-and-time h2, main article .name-and-time .h2 {
+main .part-recipes article .name-and-time h2, main .part-recipes article .name-and-time .h2 {
   font-size: 1.12em;
   color: black;
 }
-main article .name-and-time p {
+main .part-recipes article .name-and-time p {
   font-weight: bold;
 }
-main article .ingredients-and-description {
+main .part-recipes article .ingredients-and-description {
   font-size: 0.7em;
 }
-main article .ingredients-and-description .ingredients {
+main .part-recipes article .ingredients-and-description .ingredients {
   padding-right: 1em;
 }
 
-.tags-container .tags {
+.tags-container .tag-ingredients {
   background-color: #3282f7;
+}
+.tags-container .tag-appliances {
+  background-color: #68d9a4;
+}
+.tags-container .tag-ustensils {
+  background-color: #ed6454;
+}
+.tags-container .tags {
   color: white;
   border-radius: 0.3em;
   padding: 0.5em 1em;

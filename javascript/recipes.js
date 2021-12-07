@@ -1,9 +1,11 @@
 export class Recipe {
   constructor(recipe) {
     this.id = recipe.id;
+    console.log(this.id);
     this.name = recipe.name;
     this.servings = recipe.servings;
     this.ingredients = recipe.ingredients;
+    console.log(this.ingredients);
     this.time = recipe.time;
     this.description = recipe.description;
     this.appliance = recipe.appliance;
@@ -15,7 +17,7 @@ export class Recipe {
    * Create HTML for recipes cards
    */
   createHtmlRecipe() {
-    const mainRecipe = document.querySelector("main");
+    const mainRecipe = document.querySelector(".part-recipes");
     mainRecipe.innerHTML +=
       `<article data-id="${this.id}">
         <div class="picture"></div>
@@ -23,7 +25,13 @@ export class Recipe {
             <h2 class="name" data-name="${this.name}">${this.name}</h2>
             <p><i class="far fa-clock"></i> ${this.time} min</p>
         </div>
-        <div class="ingredients-and-description">
+        <div class="ingredients-and-description" data-appliance="${this.appliance}" data-ustensil="` +
+      this.ustensils
+        .map((ustensil) => {
+          return ` ${ustensil} `;
+        })
+        .join("") +
+      `">
           <div class="ingredients">
           ` +
       this.ingredients

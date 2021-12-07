@@ -5,11 +5,11 @@ export class Tags {
     this.recipes = recipes;
     console.log(this.recipes);
     this.dataType = dataType;
-    console.log(dataType);
     this.chevron = document.querySelector(`.arrow-${this.dataType}`);
     this.chevronDown = document.querySelector(
       `.arrow-${this.dataType} .fa-chevron-down`
     );
+    this.dropdown = document.querySelector(`.nav-dropdown-${this.dataType}`);
     this.label = document.querySelector(`#label-${this.dataType}`);
     this.input = document.querySelector(`#search-${this.dataType}`);
     this.button = document.querySelector(`#button-${this.dataType}`);
@@ -55,9 +55,7 @@ export class Tags {
    * Open dropdown when clic on down chevron
    */
   openDropdown() {
-    console.log(this.button);
     const isExpanded = this.button.getAttribute(`aria-expanded`);
-    console.log(isExpanded);
     if (isExpanded === "false") {
       this.button.setAttribute("aria-expanded", "true");
     }
@@ -99,7 +97,7 @@ export class Tags {
           `data-${this.dataType}`
         );
         this.createHtmlTags(dataElementClicked);
-        this.displayRecipesFilteredByElementList(dataElementClicked);
+        this.displayRecipesFilteredByTags(dataElementClicked);
       });
     });
   }
@@ -115,6 +113,7 @@ export class Tags {
       `.arrow-${this.dataType} .fa-chevron-down`
     );
     chevronDown.addEventListener("click", () => this.openDropdown());
+    this.dropdown.style.width = "9em";
   }
 
   /**
@@ -162,8 +161,8 @@ export class Tags {
         });
       }
     });
-    const dropdown = document.querySelector(`.nav-dropdown-${this.dataType}`);
-    dropdown.style.maxHeight = "23em";
+    this.dropdown.style.maxHeight = "23em";
+    this.dropdown.style.width = "100em";
     const ul = document.querySelector(`.nav-list-${this.dataType}`);
     ul.innerHTML += elements
       .map((element) => {
@@ -175,8 +174,8 @@ export class Tags {
       `.arrow-${this.dataType} .fa-chevron-up`
     );
     chevronUp.addEventListener("click", () => this.closeDropdown());
-    ul.focus();
-    ul.addEventListener("blur", () => {
+    this.ul.focus();
+    this.ul.addEventListener("blur", () => {
       this.closeDropdown();
     });
   }
@@ -189,12 +188,18 @@ export class Tags {
   createHtmlTags(dataElementClicked) {
     const tag = document.createElement("div");
     tag.classList.add("tags");
+    tag.classList.add(`tag-${this.dataType}`);
     tag.setAttribute("data-tag", `${dataElementClicked.toLowerCase()}`);
     tag.innerHTML += `<p>${dataElementClicked}</p><i class="far fa-times-circle" data-${
       this.dataType
     }="${dataElementClicked.toLowerCase()}"></i>`;
     const tagsContainer = document.querySelector(".tags-container");
     tagsContainer.appendChild(tag);
+    const tags = document.querySelectorAll(".tags");
+    tags.forEach((tag) => {
+      const dataTags = tag.getAttribute("data-tag");
+      this.displayRecipesFilteredByTags(dataTags);
+    });
     // Remove tag with cross of tag
     const crossTag = document.querySelectorAll(".fa-times-circle");
     crossTag.forEach((cross) => {
@@ -211,28 +216,57 @@ export class Tags {
   /**
    * Display filtered recipes with the search input or selected the element in dropdown list
    */
-  displayRecipesFilteredByElementList(matchedElement) {
-    const arrayRecipes = Array.from(this.recipes);
-    console.log(arrayRecipes);
-    arrayRecipes.forEach((recipe) => {
-      const elements = recipe.querySelectorAll(`.${this.dataType}`);
-      console.log(elements);
-      let allElements = [];
-      elements.forEach((element) => {
-        const dataElement = element.getAttribute(`data-${this.dataType}`);
-        allElements.push(dataElement);
-      });
-      const elementFound = allElements.some((element) =>
-        element.toUpperCase().includes(matchedElement.toUpperCase())
-      );
-      console.log(allElements);
-      console.log(elementFound);
-      if (elementFound) {
-        recipe.style.display = "block";
-        console.log(recipe);
-      } else {
-        recipe.style.display = "none";
+  displayRecipesFilteredByTags(dataTag) {
+    let recipesFiltered = [];
+    let arrayRecipesDom = [];
+    const recipesDom = document.querySelectorAll("article");
+    recipesDom.forEach((recipe) => {
+      if (recipe.style.display === "block") {
+        arrayRecipesDom.push(recipe);
       }
+    });
+    console.log(arrayRecipesDom);
+    arrayRecipesDom.forEach((recipe) => {
+      if (this.dataType == "ingredients") {
+        const ingredients = recipe.querySelectorAll(".ingredient");
+        ingredients.forEach((ingredient) => {
+          const data = ingredient.getAttribute("data-ingredient");
+          console.log(data);
+          console.log(dataTag);
+          if (data.includes(dataTag)) {
+            recipesFiltered.push(recipe);
+          }
+        });
+      } else if (this.dataType == "appliances") {
+        const containersAppliance = recipe.querySelectorAll(
+          ".ingredients-and-description"
+        );
+        containersAppliance.forEach((appliance) => {
+          const data = appliance.getAttribute("data-appliance").toLowerCase();
+          console.log(data);
+          console.log(dataTag);
+          if (data.includes(dataTag)) {
+            recipesFiltered.push(recipe);
+          }
+        });
+      } else if (this.dataType == "ustensils") {
+        const containersUstensils = recipe.querySelectorAll(
+          ".ingredients-and-description"
+        );
+        containersUstensils.forEach((ustensils) => {
+          const data = ustensils.getAttribute("data-ustensil").toLowerCase();
+          console.log(data);
+          console.log(dataTag);
+          if (data.includes(dataTag)) {
+            recipesFiltered.push(recipe);
+          }
+        });
+      }
+      console.log(recipesFiltered);
+      recipe.style.display = "none";
+      recipesFiltered.forEach((recipe) => {
+        recipe.style.display = "block";
+      });
     });
   }
 }
