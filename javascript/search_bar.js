@@ -65,6 +65,14 @@ export class SearchBar {
         recipeDom.style.display = "none";
       }
     }
+    console.log(arrayOfRecipesFiltered);
+    const mainMsgError = document.querySelector(".msg-error");
+    if (arrayOfRecipesFiltered.length === 0) {
+      mainMsgError.innerHTML = `<p class="msg-no-recipe">Aucune recette ne correspond à votre critère… vous pouvez
+    chercher « tarte aux pommes », « poisson », etc.</p>`;
+    } else {
+      mainMsgError.innerHTML = "";
+    }
   }
 
   /**

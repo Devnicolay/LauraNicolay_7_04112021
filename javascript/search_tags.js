@@ -5,6 +5,7 @@ export class Tags {
     this.recipes = recipes;
     console.log(this.recipes);
     this.dataType = dataType;
+
     this.chevron = document.querySelector(`.arrow-${this.dataType}`);
     this.chevronDown = document.querySelector(
       `.arrow-${this.dataType} .fa-chevron-down`
@@ -15,6 +16,7 @@ export class Tags {
     this.button = document.querySelector(`#button-${this.dataType}`);
     this.ul = document.querySelector(`.nav-list-${this.dataType}`);
     this.tagsContainer = document.querySelector(`.tags-container`);
+    this.openDropdown();
     this.initListeners();
   }
 
@@ -22,7 +24,6 @@ export class Tags {
    * Listeners
    */
   initListeners() {
-    this.openDropdown();
     this.label.addEventListener("click", () => this.displayInput());
     this.input.addEventListener("blur", () => this.undisplayInput());
     this.input.addEventListener("keydown", (e) => {
@@ -198,7 +199,7 @@ export class Tags {
     const tags = document.querySelectorAll(".tags");
     tags.forEach((tag) => {
       const dataTags = tag.getAttribute("data-tag");
-      this.displayRecipesFilteredByTags(dataTags);
+      console.log(dataTags);
     });
     // Remove tag with cross of tag
     const crossTag = document.querySelectorAll(".fa-times-circle");
@@ -214,26 +215,27 @@ export class Tags {
   }
 
   /**
-   * Display filtered recipes with the search input or selected the element in dropdown list
+   * @param {string} tagLabel label value of the element clicked in dropdown
+   * Display filtered recipes with the search input or selected the element in dropdown
    */
-  displayRecipesFilteredByTags(dataTag) {
+  displayRecipesFilteredByTags(tagLabelToFilter) {
     let recipesFiltered = [];
-    let arrayRecipesDom = [];
+    let recipesDisplay = [];
     const recipesDom = document.querySelectorAll("article");
     recipesDom.forEach((recipe) => {
       if (recipe.style.display === "block") {
-        arrayRecipesDom.push(recipe);
+        recipesDisplay.push(recipe);
       }
     });
-    console.log(arrayRecipesDom);
-    arrayRecipesDom.forEach((recipe) => {
+    console.log(recipesDisplay);
+    recipesDisplay.forEach((recipe) => {
       if (this.dataType == "ingredients") {
         const ingredients = recipe.querySelectorAll(".ingredient");
         ingredients.forEach((ingredient) => {
           const data = ingredient.getAttribute("data-ingredient");
           console.log(data);
-          console.log(dataTag);
-          if (data.includes(dataTag)) {
+          console.log(tagLabelToFilter);
+          if (data.includes(tagLabelToFilter)) {
             recipesFiltered.push(recipe);
           }
         });
@@ -244,8 +246,8 @@ export class Tags {
         containersAppliance.forEach((appliance) => {
           const data = appliance.getAttribute("data-appliance").toLowerCase();
           console.log(data);
-          console.log(dataTag);
-          if (data.includes(dataTag)) {
+          console.log(tagLabelToFilter);
+          if (data.includes(tagLabelToFilter)) {
             recipesFiltered.push(recipe);
           }
         });
@@ -256,17 +258,17 @@ export class Tags {
         containersUstensils.forEach((ustensils) => {
           const data = ustensils.getAttribute("data-ustensil").toLowerCase();
           console.log(data);
-          console.log(dataTag);
-          if (data.includes(dataTag)) {
+          console.log(tagLabelToFilter);
+          if (data.includes(tagLabelToFilter)) {
             recipesFiltered.push(recipe);
           }
         });
       }
       console.log(recipesFiltered);
       recipe.style.display = "none";
-      recipesFiltered.forEach((recipe) => {
-        recipe.style.display = "block";
-      });
+    });
+    recipesFiltered.forEach((recipe) => {
+      recipe.style.display = "block";
     });
   }
 }

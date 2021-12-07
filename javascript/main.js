@@ -7,33 +7,24 @@ import { Tags } from "./search_tags.js";
  * Display all recipes when the page loads
  */
 export class HomePage {
-  constructor(recipesFiltered) {
-    this.recipesFiltered = recipesFiltered;
-    console.log(this.recipesFiltered);
+  constructor() {
     this.initHomePage();
   }
   initHomePage() {
-    let theRecipes = this.recipesFiltered;
-    console.log(theRecipes);
-    if (theRecipes == undefined) {
-      theRecipes = recipes;
-    }
-    console.log(theRecipes);
     // Display recipes
-    recipes.map((recipe) => {
+    const arrayOfRecipes = recipes.map((recipe) => {
       return new Recipe(recipe);
     });
-    new SearchBar(recipes);
+    console.log(arrayOfRecipes);
+    new SearchBar(arrayOfRecipes);
 
     let dataType = "";
     const chevronDownIngredients = document.querySelector(
       ".arrow-ingredients .fa-chevron-down"
     );
-    console.log(theRecipes);
     chevronDownIngredients.addEventListener("click", () => {
       dataType = "ingredients";
-      console.log(theRecipes);
-      new Tags(theRecipes, dataType);
+      new Tags(arrayOfRecipes, dataType);
     });
     const labelIngredients = document.querySelector("#label-ingredients");
     const inputIngredients = document.querySelector("#search-ingredients");
@@ -51,7 +42,7 @@ export class HomePage {
     );
     chevronDownAppliances.addEventListener("click", () => {
       dataType = "appliances";
-      new Tags(theRecipes, dataType);
+      new Tags(arrayOfRecipes, dataType);
     });
     const labelAppliances = document.querySelector("#label-appliances");
     const inputAppliances = document.querySelector("#search-appliances");
@@ -69,7 +60,7 @@ export class HomePage {
     );
     chevronDownUstensils.addEventListener("click", () => {
       dataType = "ustensils";
-      new Tags(theRecipes, dataType);
+      new Tags(arrayOfRecipes, dataType);
     });
     const labelUstensils = document.querySelector("#label-ustensils");
     const inputUstensils = document.querySelector("#search-ustensils");

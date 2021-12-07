@@ -1,11 +1,10 @@
 export class Recipe {
   constructor(recipe) {
+    this.recipe = recipe;
     this.id = recipe.id;
-    console.log(this.id);
     this.name = recipe.name;
     this.servings = recipe.servings;
     this.ingredients = recipe.ingredients;
-    console.log(this.ingredients);
     this.time = recipe.time;
     this.description = recipe.description;
     this.appliance = recipe.appliance;
