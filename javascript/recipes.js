@@ -18,19 +18,25 @@ export class Recipe {
   createHtmlRecipe() {
     const mainRecipe = document.querySelector(".part-recipes");
     mainRecipe.innerHTML +=
-      `<article data-id="${this.id}">
+      `<article data-id="${this.id}" data-ingredients= "` +
+      this.ingredients
+        .map((ingredient) => {
+          return ` ${ingredient.ingredient.toLowerCase()} `;
+        })
+        .join(",") +
+      `" data-appliance="${this.appliance.toLowerCase()}" data-ustensil="` +
+      this.ustensils
+        .map((ustensil) => {
+          return ` ${ustensil.toLowerCase()} `;
+        })
+        .join("") +
+      `">
         <div class="picture"></div>
         <div class="name-and-time">
             <h2 class="name" data-name="${this.name}">${this.name}</h2>
             <p><i class="far fa-clock"></i> ${this.time} min</p>
         </div>
-        <div class="ingredients-and-description" data-appliance="${this.appliance}" data-ustensil="` +
-      this.ustensils
-        .map((ustensil) => {
-          return ` ${ustensil} `;
-        })
-        .join("") +
-      `">
+        <div class="ingredients-and-description">
           <div class="ingredients">
           ` +
       this.ingredients

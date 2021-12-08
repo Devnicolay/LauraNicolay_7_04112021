@@ -98,7 +98,6 @@ export class Tags {
           `data-${this.dataType}`
         );
         this.createHtmlTags(dataElementClicked);
-        this.displayRecipesFilteredByTags(dataElementClicked);
       });
     });
   }
@@ -200,75 +199,6 @@ export class Tags {
     tags.forEach((tag) => {
       const dataTags = tag.getAttribute("data-tag");
       console.log(dataTags);
-    });
-    // Remove tag with cross of tag
-    const crossTag = document.querySelectorAll(".fa-times-circle");
-    crossTag.forEach((cross) => {
-      cross.addEventListener("click", () => {
-        const dataCross = cross.getAttribute(`data-${this.dataType}`);
-        const dataTag = tag.getAttribute("data-tag");
-        if (dataCross == dataTag) {
-          tag.style.display = "none";
-        }
-      });
-    });
-  }
-
-  /**
-   * @param {string} tagLabel label value of the element clicked in dropdown
-   * Display filtered recipes with the search input or selected the element in dropdown
-   */
-  displayRecipesFilteredByTags(tagLabelToFilter) {
-    let recipesFiltered = [];
-    let recipesDisplay = [];
-    const recipesDom = document.querySelectorAll("article");
-    recipesDom.forEach((recipe) => {
-      if (recipe.style.display === "block") {
-        recipesDisplay.push(recipe);
-      }
-    });
-    console.log(recipesDisplay);
-    recipesDisplay.forEach((recipe) => {
-      if (this.dataType == "ingredients") {
-        const ingredients = recipe.querySelectorAll(".ingredient");
-        ingredients.forEach((ingredient) => {
-          const data = ingredient.getAttribute("data-ingredient");
-          console.log(data);
-          console.log(tagLabelToFilter);
-          if (data.includes(tagLabelToFilter)) {
-            recipesFiltered.push(recipe);
-          }
-        });
-      } else if (this.dataType == "appliances") {
-        const containersAppliance = recipe.querySelectorAll(
-          ".ingredients-and-description"
-        );
-        containersAppliance.forEach((appliance) => {
-          const data = appliance.getAttribute("data-appliance").toLowerCase();
-          console.log(data);
-          console.log(tagLabelToFilter);
-          if (data.includes(tagLabelToFilter)) {
-            recipesFiltered.push(recipe);
-          }
-        });
-      } else if (this.dataType == "ustensils") {
-        const containersUstensils = recipe.querySelectorAll(
-          ".ingredients-and-description"
-        );
-        containersUstensils.forEach((ustensils) => {
-          const data = ustensils.getAttribute("data-ustensil").toLowerCase();
-          console.log(data);
-          console.log(tagLabelToFilter);
-          if (data.includes(tagLabelToFilter)) {
-            recipesFiltered.push(recipe);
-          }
-        });
-      }
-      console.log(recipesFiltered);
-      recipe.style.display = "none";
-    });
-    recipesFiltered.forEach((recipe) => {
-      recipe.style.display = "block";
     });
   }
 }

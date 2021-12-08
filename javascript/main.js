@@ -25,6 +25,7 @@ export class HomePage {
     chevronDownIngredients.addEventListener("click", () => {
       dataType = "ingredients";
       new Tags(arrayOfRecipes, dataType);
+      new SearchBar(arrayOfRecipes, dataType);
     });
     const labelIngredients = document.querySelector("#label-ingredients");
     const inputIngredients = document.querySelector("#search-ingredients");
@@ -43,6 +44,7 @@ export class HomePage {
     chevronDownAppliances.addEventListener("click", () => {
       dataType = "appliances";
       new Tags(arrayOfRecipes, dataType);
+      new SearchBar(arrayOfRecipes, dataType);
     });
     const labelAppliances = document.querySelector("#label-appliances");
     const inputAppliances = document.querySelector("#search-appliances");
@@ -61,6 +63,7 @@ export class HomePage {
     chevronDownUstensils.addEventListener("click", () => {
       dataType = "ustensils";
       new Tags(arrayOfRecipes, dataType);
+      new SearchBar(arrayOfRecipes, dataType);
     });
     const labelUstensils = document.querySelector("#label-ustensils");
     const inputUstensils = document.querySelector("#search-ustensils");
