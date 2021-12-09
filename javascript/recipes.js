@@ -29,7 +29,7 @@ export class Recipe {
         .map((ustensil) => {
           return ` ${ustensil.toLowerCase()} `;
         })
-        .join("") +
+        .join(",") +
       `">
         <div class="picture"></div>
         <div class="name-and-time">
