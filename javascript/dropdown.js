@@ -1,6 +1,5 @@
 import { Search } from "./searchBar.js";
 import { recipes } from "./data_recipes/recipes_data.js";
-import { Recipe } from "./recipes.js";
 
 export class Dropdown {
   constructor(dataTypeDropdown, ingredients, appliances, ustensils) {
@@ -61,6 +60,7 @@ export class Dropdown {
     const chevronUp = document.querySelector(
       `.arrow-${this.dataType} .fa-chevron-up`
     );
+    // close dropdown
     chevronUp.addEventListener("click", () => this.closeDropdown());
     this.ul.focus();
     this.ul.addEventListener("blur", () => {
@@ -119,51 +119,32 @@ export class Dropdown {
     let resultRecipes;
     if (recipesFiltered == undefined) {
       recipesFiltered = recipes;
-      resultRecipes = recipesFiltered.filter((recipe) => {
-        return tagsDisplayed.every((tag) => {
-          return (
-            recipe.ingredients.some((i) => {
-              return i.ingredient.toLowerCase().includes(tag);
-            }) ||
-            recipe.appliance.toLowerCase().includes(tag) ||
-            recipe.ustensils.some((ustensil) => {
-              return ustensil.toLowerCase() === tag;
-            })
-          );
-        });
-      });
-    } else {
-      console.log(recipesFiltered);
-      resultRecipes = recipesFiltered.filter((recipe) => {
-        return tagsDisplayed.every((tag) => {
-          const ingredients = recipe.querySelector(".ingredient");
-          const recipeDom = document.querySelectorAll("article");
-          return (
-            Array.from(ingredients).some((ingredient) => {
-              return ingredient
-                .getAttribute("data-ingredient")
-                .toLowerCase()
-                .includes(tag);
-            }) ||
-            recipeDom.forEach((recipe) => {
-              const appliance = recipe.getAttribute("data-appliance");
-              Array.from(appliance).some((appl) => {
-                return appl.toLowerCase().includes(tag);
-              });
-            }) ||
-            recipeDom.forEach((recipe) => {
-              const ustensil = recipe.getAttribute("data-ustensil");
-              const ustensils = ustensil.split(",");
-              console.log(ustensils);
-              Array.from(ustensils).some((ustensil) => {
-                return ustensil.toLowerCase() === tag;
-              });
-            })
-          );
-        });
-      });
     }
+    resultRecipes = recipesFiltered.filter((recipe) => {
+      return tagsDisplayed.every((tag) => {
+        return (
+          recipe.ingredients.some((i) => {
+            return i.ingredient.toLowerCase().includes(tag);
+          }) ||
+          recipe.appliance.toLowerCase().includes(tag) ||
+          recipe.ustensils.some((ustensil) => {
+            return ustensil.toLowerCase() === tag;
+          })
+        );
+      });
+    });
     console.log(resultRecipes);
+
+    const allRecipesDom = document.querySelectorAll("article");
+    allRecipesDom.forEach((recipe) => {
+      recipe.style.display = "none";
+    });
+    resultRecipes.forEach((recipe) => {
+      const recipeDom = document.querySelector(
+        `article[data-id="${recipe.id}"]`
+      );
+      recipeDom.style.display = "block";
+    });
   }
 
   /**
@@ -171,8 +152,7 @@ export class Dropdown {
    * @param {string} valueInput Value of input dropdown
    * Display elements in dropdown wich include the value of input
    */
-  filterElementInDropdown(valueInput, dataTypeDropdown) {
-    this.openDropdown(dataTypeDropdown);
+  filterElementInDropdown(valueInput) {
     const isExpanded = this.button.getAttribute(`aria-expanded`);
     if (isExpanded === "false") {
       this.button.setAttribute("aria-expanded", "true");

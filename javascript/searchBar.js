@@ -5,8 +5,11 @@ const searchBar = document.getElementById("research");
 let arrayOfRecipesFiltered;
 
 export class Search {
-  constructor(recipes) {
+  constructor(recipes, dataTypeDropdown) {
     this.recipes = recipes;
+    console.log(this.recipes);
+    this.dataType = dataTypeDropdown;
+    console.log(this.dataType);
     this.initListeners();
   }
 
@@ -59,7 +62,7 @@ export class Search {
         hasTheWantedDescription
       ) {
         recipeDom.style.display = "block";
-        recipesFiltered.push(recipeDom);
+        recipesFiltered.push(recipes[i]);
       } else {
         recipeDom.style.display = "none";
       }
@@ -91,5 +94,32 @@ export class Search {
       );
       recipeDom.style.display = "block";
     }
+  }
+
+  /**
+   *
+   * @param {string} valueInput Value of input dropdown
+   * Display elements in dropdown wich include the value of input
+   */
+  filterElementInDropdown(valueInput, dataTypeDropdown) {
+    console.log(dataTypeDropdown);
+    const button = document.querySelector(`#button-${dataTypeDropdown}`);
+    const isExpanded = button.getAttribute(`aria-expanded`);
+    if (isExpanded === "false") {
+      button.setAttribute("aria-expanded", "true");
+    }
+    const li = Array.from(
+      document.querySelectorAll(
+        `.nav-list-${dataTypeDropdown} .li-${dataTypeDropdown}`
+      )
+    );
+    li.forEach((element) => {
+      const data = element.getAttribute(`data-${dataTypeDropdown}`);
+      if (data.includes(valueInput)) {
+        element.style.display = "block";
+      } else {
+        element.style.display = "none";
+      }
+    });
   }
 }

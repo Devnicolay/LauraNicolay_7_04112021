@@ -1,7 +1,5 @@
 import { recipes } from "./data_recipes/recipes_data.js";
 import { Recipe } from "./recipes.js";
-import { SearchBar } from "./search_bar.js";
-import { Tags } from "./search_tags.js";
 import { Dropdown } from "./dropdown.js";
 import { Search } from "./searchBar.js";
 
@@ -108,6 +106,7 @@ export class HomePage {
     });
 
     // Part searchBar
+    console.log(dataTypeDropdown);
     new Search(recipes, dataTypeDropdown);
   }
 
@@ -133,7 +132,6 @@ export class HomePage {
    */
   initListenersInputDropdown(input, dataTypeDropdown) {
     input.addEventListener("keydown", (e) => {
-      console.log("test ok");
       if (e.target.value.length >= 3) {
         console.log(dataTypeDropdown);
         const searchBar = document.getElementById(`search-${dataTypeDropdown}`);
