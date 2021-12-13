@@ -1,3 +1,5 @@
+import { recipes } from "./data_recipes/recipes_data.js";
+
 /**
  * DOM
  */
@@ -5,11 +7,10 @@ const searchBar = document.getElementById("research");
 let arrayOfRecipesFiltered;
 
 export class Search {
-  constructor(recipes, dataTypeDropdown) {
+  constructor(recipes, dataTypeDropdown, selectedTag) {
     this.recipes = recipes;
-    console.log(this.recipes);
     this.dataType = dataTypeDropdown;
-    console.log(this.dataType);
+    this.selectedTag = selectedTag;
     this.initListeners();
   }
 
@@ -19,9 +20,9 @@ export class Search {
   initListeners() {
     searchBar.addEventListener("keydown", (e) => {
       if (e.target.value.length >= 3) {
-        this.recipesFilteredWithInput(this.recipes);
+        this.recipesFilteredWithInput();
       } else {
-        this.displayAllRecipes(this.recipes);
+        this.displayAllRecipes();
       }
     });
   }
@@ -29,22 +30,20 @@ export class Search {
   /**
    * Create an array of recipes that matches with search field
    */
-  recipesFilteredWithInput(recipes) {
-    console.log(recipes);
+  recipesFilteredWithInput() {
     let recipesFiltered = [];
     const valueInput = searchBar.value.toLowerCase();
     for (let i = 0; i < recipes.length; i++) {
+      const recipe = this.recipes[i];
       const recipeDom = document.querySelector(
-        `article[data-id="${recipes[i].id}"]`
+        `article[data-id="${recipe.id}"]`
       );
-      const hasTheWantedName = recipes[i].name
-        .toLowerCase()
-        .includes(valueInput);
-      const hasTheWantedDescription = recipes[i].description
+      const hasTheWantedName = recipe.name.toLowerCase().includes(valueInput);
+      const hasTheWantedDescription = recipe.description
         .toLowerCase()
         .includes(valueInput);
 
-      const ingredients = recipes[i].ingredients;
+      const ingredients = recipe.ingredients;
 
       let hasTheWantedIngredient = false;
       for (let j = 0; j < ingredients.length; j++) {
@@ -62,12 +61,40 @@ export class Search {
         hasTheWantedDescription
       ) {
         recipeDom.style.display = "block";
-        recipesFiltered.push(recipes[i]);
+        recipesFiltered.push(recipe);
       } else {
         recipeDom.style.display = "none";
       }
     }
-    console.log(recipesFiltered);
+
+    if (this.selectedTag.size) {
+      // if there are tags selected
+      recipesFiltered = recipesFiltered.filter((recipe) => {
+        const shouldBeKept = Array.from(this.selectedTag).every((tag) => {
+          return (
+            recipe.ingredients.some((i) => {
+              return i.ingredient.toLowerCase().includes(tag.toLowerCase());
+            }) ||
+            recipe.appliance.toLowerCase().includes(tag.toLowerCase()) ||
+            recipe.ustensils.some((ustensil) => {
+              return ustensil.toLowerCase() === tag.toLowerCase();
+            })
+          );
+        });
+
+        const recipeDom = document.querySelector(
+          `article[data-id="${recipe.id}"]`
+        );
+        if (shouldBeKept) {
+          recipeDom.style.display = "block";
+        } else {
+          recipeDom.style.display = "none";
+        }
+
+        return shouldBeKept;
+      });
+    }
+
     const mainMsgError = document.querySelector(".msg-error");
     if (recipesFiltered.length === 0) {
       mainMsgError.innerHTML = `<p class="msg-no-recipe">Aucune recette ne correspond à votre critère… vous pouvez
@@ -76,21 +103,20 @@ export class Search {
       mainMsgError.innerHTML = "";
     }
     arrayOfRecipesFiltered = recipesFiltered;
-    console.log(arrayOfRecipesFiltered);
+    return arrayOfRecipesFiltered;
   }
 
   getArray() {
-    console.log(arrayOfRecipesFiltered);
     return arrayOfRecipesFiltered;
   }
 
   /**
    * Display all recipes when the value of search input is less than 3 caracters
    */
-  displayAllRecipes(recipes) {
-    for (let i = 0; i < recipes.length; i++) {
+  displayAllRecipes() {
+    for (let i = 0; i < this.recipes.length; i++) {
       const recipeDom = document.querySelector(
-        `article[data-id="${recipes[i].id}"]`
+        `article[data-id="${this.recipes[i].id}"]`
       );
       recipeDom.style.display = "block";
     }
@@ -102,7 +128,6 @@ export class Search {
    * Display elements in dropdown wich include the value of input
    */
   filterElementInDropdown(valueInput, dataTypeDropdown) {
-    console.log(dataTypeDropdown);
     const button = document.querySelector(`#button-${dataTypeDropdown}`);
     const isExpanded = button.getAttribute(`aria-expanded`);
     if (isExpanded === "false") {

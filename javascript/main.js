@@ -8,9 +8,7 @@ import { Search } from "./searchBar.js";
  */
 export class HomePage {
   constructor() {
-    this.arrayIngredients = new Set();
-    this.arrayAppliances = new Set();
-    this.arrayUstensils = new Set();
+    this.selectedTags = new Set();
     this.initHomePage();
   }
 
@@ -24,28 +22,33 @@ export class HomePage {
     });
 
     // Generate array of ingredients, array of appliances and array of ustensils
-    recipes.map((recipe) => {
+    const ingredients = new Set();
+    const appliances = new Set();
+    const ustensils = new Set();
+    recipes.forEach((recipe) => {
       recipe.ingredients.forEach((ingredient) => {
-        this.arrayIngredients.add(ingredient.ingredient);
+        ingredients.add(ingredient.ingredient);
       });
-      this.arrayAppliances.add(recipe.appliance);
+      appliances.add(recipe.appliance);
       recipe.ustensils.forEach((ustensil) => {
-        this.arrayUstensils.add(ustensil);
+        ustensils.add(ustensil);
       });
     });
 
     // Part dropdowns
     let dataTypeDropdown = "";
+    const searchBar = new Search(recipes, dataTypeDropdown, this.selectedTags);
     const chevronDownIngredients = document.querySelector(
       ".arrow-ingredients .fa-chevron-down"
     );
     chevronDownIngredients.addEventListener("click", () => {
+      console.log(this.selectedTags);
       dataTypeDropdown = "ingredients";
       new Dropdown(
         dataTypeDropdown,
-        this.arrayIngredients,
-        this.arrayAppliances,
-        this.arrayUstensils
+        Array.from(ingredients),
+        this.selectedTags,
+        searchBar
       );
     });
     const chevronDownAppliances = document.querySelector(
@@ -55,9 +58,9 @@ export class HomePage {
       dataTypeDropdown = "appliances";
       new Dropdown(
         dataTypeDropdown,
-        this.arrayIngredients,
-        this.arrayAppliances,
-        this.arrayUstensils
+        Array.from(appliances),
+        this.selectedTags,
+        searchBar
       );
     });
     const chevronDownUstensils = document.querySelector(
@@ -67,9 +70,9 @@ export class HomePage {
       dataTypeDropdown = "ustensils";
       new Dropdown(
         dataTypeDropdown,
-        this.arrayIngredients,
-        this.arrayAppliances,
-        this.arrayUstensils
+        Array.from(ustensils),
+        this.selectedTags,
+        searchBar
       );
     });
 
@@ -104,10 +107,6 @@ export class HomePage {
     inputUstensil.addEventListener("blur", () => {
       this.undisplayInput(labelUstensil, inputUstensil);
     });
-
-    // Part searchBar
-    console.log(dataTypeDropdown);
-    new Search(recipes, dataTypeDropdown);
   }
 
   /**

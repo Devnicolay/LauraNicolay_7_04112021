@@ -1,11 +1,12 @@
-import { Search } from "./searchBar.js";
 import { recipes } from "./data_recipes/recipes_data.js";
 
+let resultRecipes = [];
+
 export class Dropdown {
-  constructor(dataTypeDropdown, ingredients, appliances, ustensils) {
-    this.ingredients = ingredients;
-    this.appliances = appliances;
-    this.ustensils = ustensils;
+  constructor(dataTypeDropdown, tags, selectedTags, searchbar) {
+    this.selectedTags = Array.from(selectedTags);
+    this.searchBar = searchbar;
+    this.tags = tags;
     this.dataType = dataTypeDropdown;
     this.chevron = document.querySelector(`.arrow-${this.dataType}`);
     this.chevronDown = document.querySelector(
@@ -25,17 +26,46 @@ export class Dropdown {
     if (isExpanded === "false") {
       this.button.setAttribute("aria-expanded", "true");
     }
-    let elements;
-    if (this.dataType == "ingredients") {
-      elements = Array.from(this.ingredients);
-    } else if (this.dataType == "appliances") {
-      elements = Array.from(this.appliances);
-    } else if (this.dataType == "ustensils") {
-      elements = Array.from(this.ustensils);
-    }
     this.dropdown.style.maxHeight = "23em";
     this.dropdown.style.width = "100em";
-    this.createHtmlDropdown(elements);
+    const searchBar = document.getElementById("research");
+    const valueSearchBar = searchBar.value.toLowerCase();
+    if (valueSearchBar.length >= 3) {
+      const recipesFiltered = this.searchBar.getArray();
+      this.filterElement(recipesFiltered);
+    } else if (resultRecipes.length > 0) {
+      this.filterElement(resultRecipes);
+    } else {
+      this.createHtmlDropdown(this.tags);
+    }
+  }
+
+  filterElement(recipesFiltered) {
+    if (this.dataType == "ingredients") {
+      const ingredients = new Set();
+      recipesFiltered.forEach((recipe) => {
+        recipe.ingredients.forEach((ingredient) => {
+          ingredients.add(ingredient.ingredient.toLowerCase());
+        });
+      });
+      this.createHtmlDropdown(Array.from(ingredients));
+    }
+    if (this.dataType == "appliances") {
+      const appliances = new Set();
+      recipesFiltered.forEach((recipe) => {
+        appliances.add(recipe.appliance.toLowerCase());
+      });
+      this.createHtmlDropdown(Array.from(appliances));
+    }
+    if (this.dataType == "ustensils") {
+      const ustensils = new Set();
+      recipesFiltered.forEach((recipe) => {
+        recipe.ustensils.forEach((ustensil) => {
+          ustensils.add(ustensil.toLowerCase());
+        });
+      });
+      this.createHtmlDropdown(Array.from(ustensils));
+    }
   }
 
   closeDropdown() {
@@ -51,6 +81,7 @@ export class Dropdown {
 
   createHtmlDropdown(elements) {
     const ul = document.querySelector(`.nav-list-${this.dataType}`);
+    ul.innerHTML = "";
     ul.innerHTML += elements
       .map((element) => {
         return `<li class="li-${this.dataType}" data-${this.dataType}="${element}">${element}</li>`;
@@ -60,6 +91,10 @@ export class Dropdown {
     const chevronUp = document.querySelector(
       `.arrow-${this.dataType} .fa-chevron-up`
     );
+    // filter elements with value of searchBar
+    const searchBar = document.getElementById("research");
+    const valueInput = searchBar.value.toLowerCase();
+    this.filterElementInDropdown(valueInput);
     // close dropdown
     chevronUp.addEventListener("click", () => this.closeDropdown());
     this.ul.focus();
@@ -79,6 +114,12 @@ export class Dropdown {
       element.addEventListener("click", () => {
         const dataElementClicked = element.getAttribute(
           `data-${this.dataType}`
+        );
+        this.selectedTags.push(dataElementClicked.toLowerCase());
+        this.searchBar.recipesFilteredWithInput(
+          recipes,
+          this.dataType,
+          this.selectedTags
         );
         this.createHtmlTags(dataElementClicked);
       });
@@ -100,6 +141,10 @@ export class Dropdown {
     }="${dataElementClicked.toLowerCase()}"></i>`;
     const tagsContainer = document.querySelector(".tags-container");
     tagsContainer.appendChild(tag);
+    this.pushTagDisplayedInArray();
+  }
+
+  pushTagDisplayedInArray() {
     const tags = document.querySelectorAll(".tags");
     const tagsDisplayed = [];
     tags.forEach((tag) => {
@@ -107,16 +152,45 @@ export class Dropdown {
       const labelTag = tag.getAttribute("data-tag");
       tagsDisplayed.push(labelTag);
     });
-    const newClass = new Search();
-    const recipesFiltered = newClass.getArray();
+    const recipesFiltered = this.searchBar.recipesFilteredWithInput();
     this.displayRecipesFiltered(tagsDisplayed, recipesFiltered);
+    this.removeTag();
   }
 
+  /**
+   * Remove tag with cross of tag
+   */
+  removeTag() {
+    const crossTag = document.querySelectorAll(".fa-times-circle");
+    crossTag.forEach((cross) => {
+      cross.addEventListener("click", () => {
+        const dataCross = cross.getAttribute(`data-${this.dataType}`);
+        const tags = document.querySelectorAll(".tags");
+        tags.forEach((tag) => {
+          const dataTag = tag.getAttribute("data-tag");
+          if (dataCross == dataTag) {
+            tag.remove();
+            const indexTagForRemove = this.selectedTags.indexOf(dataTag);
+            this.selectedTags.splice(indexTagForRemove, 1);
+            this.searchBar.recipesFilteredWithInput(
+              recipes,
+              this.dataType,
+              this.selectedTags
+            );
+            this.pushTagDisplayedInArray();
+          }
+        });
+      });
+    });
+  }
+
+  /**
+   * Display recipes filtered
+   * @param {array} tagsDisplayed tags displayed on the page
+   * @param {array} recipesFilteredBySearchBar recipes filtered with searchBar
+   */
   displayRecipesFiltered(tagsDisplayed, recipesFilteredBySearchBar) {
-    console.log(tagsDisplayed);
     let recipesFiltered = recipesFilteredBySearchBar;
-    console.log(recipesFiltered);
-    let resultRecipes;
     if (recipesFiltered == undefined) {
       recipesFiltered = recipes;
     }
@@ -145,6 +219,7 @@ export class Dropdown {
       );
       recipeDom.style.display = "block";
     });
+    this.openDropdown();
   }
 
   /**
