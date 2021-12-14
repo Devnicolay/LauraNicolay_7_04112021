@@ -1,17 +1,16 @@
-import { Dropdown } from "./dropdown.js";
 import { recipes } from "./data_recipes/recipes_data.js";
 
 /**
  * DOM
  */
 const searchBar = document.getElementById("research");
-let arrayOfRecipesFiltered;
 
 export class Search {
   constructor(recipes, dataTypeDropdown, selectedTag) {
     this.recipes = recipes;
     this.dataType = dataTypeDropdown;
     this.selectedTag = selectedTag;
+    this.recipesFiltered = recipes;
     this.initListeners();
   }
 
@@ -63,16 +62,15 @@ export class Search {
       ) {
         recipeDom.style.display = "block";
         recipesFiltered.push(recipe);
+        this.recipesFiltered = recipesFiltered;
       } else {
         recipeDom.style.display = "none";
       }
     }
 
-    console.log(this.selectedTag);
-    if (this.selectedTag.length >= 0) {
-      console.log("tags affichés");
+    if (this.selectedTag.size) {
       // if there are tags selected
-      recipesFiltered = recipesFiltered.filter((recipe) => {
+      this.recipesFiltered = recipesFiltered.filter((recipe) => {
         const shouldBeKept = Array.from(this.selectedTag).every((tag) => {
           return (
             recipe.ingredients.some((i) => {
@@ -84,9 +82,6 @@ export class Search {
             })
           );
         });
-
-        const newDropdown = new Dropdown();
-        newDropdown.openDropdown(recipesFiltered);
 
         const recipeDom = document.querySelector(
           `article[data-id="${recipe.id}"]`
@@ -100,6 +95,8 @@ export class Search {
         return shouldBeKept;
       });
     }
+    console.log(this.selectedTag.size);
+    console.log(this.recipesFiltered);
 
     const mainMsgError = document.querySelector(".msg-error");
     if (recipesFiltered.length === 0) {
@@ -108,12 +105,6 @@ export class Search {
     } else {
       mainMsgError.innerHTML = "";
     }
-    arrayOfRecipesFiltered = recipesFiltered;
-    return arrayOfRecipesFiltered;
-  }
-
-  getArray() {
-    return arrayOfRecipesFiltered;
   }
 
   /**
@@ -125,32 +116,6 @@ export class Search {
         `article[data-id="${this.recipes[i].id}"]`
       );
       recipeDom.style.display = "block";
-    }
-  }
-
-  /**
-   *
-   * @param {string} valueInput Value of input dropdown
-   * Display elements in dropdown wich include the value of input
-   */
-  filterElementInDropdown(valueInput, dataTypeDropdown) {
-    const button = document.querySelector(`#button-${dataTypeDropdown}`);
-    const isExpanded = button.getAttribute(`aria-expanded`);
-    if (isExpanded === "false") {
-      button.setAttribute("aria-expanded", "true");
-    }
-    const li = Array.from(
-      document.querySelectorAll(
-        `.nav-list-${dataTypeDropdown} .li-${dataTypeDropdown}`
-      )
-    );
-    for (let i = 0; i < li.length; i++) {
-      const data = li[i].getAttribute(`data-${dataTypeDropdown}`);
-      if (data.includes(valueInput)) {
-        li[i].style.display = "block";
-      } else {
-        li[i].style.display = "none";
-      }
     }
   }
 }
