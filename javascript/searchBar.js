@@ -1,3 +1,4 @@
+import { Dropdown } from "./dropdown.js";
 import { recipes } from "./data_recipes/recipes_data.js";
 
 /**
@@ -67,7 +68,9 @@ export class Search {
       }
     }
 
-    if (this.selectedTag.size) {
+    console.log(this.selectedTag);
+    if (this.selectedTag.length >= 0) {
+      console.log("tags affichés");
       // if there are tags selected
       recipesFiltered = recipesFiltered.filter((recipe) => {
         const shouldBeKept = Array.from(this.selectedTag).every((tag) => {
@@ -81,6 +84,9 @@ export class Search {
             })
           );
         });
+
+        const newDropdown = new Dropdown();
+        newDropdown.openDropdown(recipesFiltered);
 
         const recipeDom = document.querySelector(
           `article[data-id="${recipe.id}"]`
@@ -138,13 +144,13 @@ export class Search {
         `.nav-list-${dataTypeDropdown} .li-${dataTypeDropdown}`
       )
     );
-    li.forEach((element) => {
-      const data = element.getAttribute(`data-${dataTypeDropdown}`);
+    for (let i = 0; i < li.length; i++) {
+      const data = li[i].getAttribute(`data-${dataTypeDropdown}`);
       if (data.includes(valueInput)) {
-        element.style.display = "block";
+        li[i].style.display = "block";
       } else {
-        element.style.display = "none";
+        li[i].style.display = "none";
       }
-    });
+    }
   }
 }

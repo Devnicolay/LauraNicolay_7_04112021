@@ -1,11 +1,14 @@
 import { recipes } from "./data_recipes/recipes_data.js";
+import { Search } from "./searchBar.js";
 
 let resultRecipes = [];
 
 export class Dropdown {
   constructor(dataTypeDropdown, tags, selectedTags, searchbar) {
     this.selectedTags = Array.from(selectedTags);
+    console.log(selectedTags);
     this.searchBar = searchbar;
+    console.log(searchbar);
     this.tags = tags;
     this.dataType = dataTypeDropdown;
     this.chevron = document.querySelector(`.arrow-${this.dataType}`);
@@ -22,6 +25,9 @@ export class Dropdown {
   }
 
   openDropdown() {
+    if (resultRecipes == undefined) {
+      resultRecipes = [];
+    }
     const isExpanded = this.button.getAttribute(`aria-expanded`);
     if (isExpanded === "false") {
       this.button.setAttribute("aria-expanded", "true");
@@ -30,10 +36,11 @@ export class Dropdown {
     this.dropdown.style.width = "100em";
     const searchBar = document.getElementById("research");
     const valueSearchBar = searchBar.value.toLowerCase();
+    console.log(resultRecipes);
     if (valueSearchBar.length >= 3) {
       const recipesFiltered = this.searchBar.getArray();
       this.filterElement(recipesFiltered);
-    } else if (resultRecipes.length > 0) {
+    } else if (resultRecipes.length > -1) {
       this.filterElement(resultRecipes);
     } else {
       this.createHtmlDropdown(this.tags);
@@ -41,6 +48,7 @@ export class Dropdown {
   }
 
   filterElement(recipesFiltered) {
+    console.log("filtré");
     if (this.dataType == "ingredients") {
       const ingredients = new Set();
       recipesFiltered.forEach((recipe) => {
@@ -152,8 +160,9 @@ export class Dropdown {
       const labelTag = tag.getAttribute("data-tag");
       tagsDisplayed.push(labelTag);
     });
-    const recipesFiltered = this.searchBar.recipesFilteredWithInput();
-    this.displayRecipesFiltered(tagsDisplayed, recipesFiltered);
+    const newSearchBar = new Search(recipes, this.dataType, this.selectedTags);
+    newSearchBar.recipesFilteredWithInput();
+    this.openDropdown();
     this.removeTag();
   }
 
@@ -172,6 +181,7 @@ export class Dropdown {
             tag.remove();
             const indexTagForRemove = this.selectedTags.indexOf(dataTag);
             this.selectedTags.splice(indexTagForRemove, 1);
+            console.log(this.selectedTags);
             this.searchBar.recipesFilteredWithInput(
               recipes,
               this.dataType,
