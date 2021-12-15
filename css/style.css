@@ -11222,6 +11222,7 @@ header .nav-dropdown-ustensils {
   margin: 0em 2em;
   border-radius: 0.3em;
   max-height: 4em;
+  width: 8em;
   overflow: scroll;
 }
 header .nav-dropdown-ingredients button,
@@ -11337,8 +11338,8 @@ main .part-recipes {
   gap: 3em;
 }
 main .part-recipes article {
-  max-width: 20em;
-  max-height: 20em;
+  width: 23em;
+  height: 22.75em;
   background-color: #e7e7e7;
   border-radius: 0.3em;
   overflow: hidden;
@@ -11352,7 +11353,10 @@ main .part-recipes article .name-and-time,
 main .part-recipes article .ingredients-and-description {
   display: flex;
   justify-content: space-between;
-  padding: 1em;
+  padding: 1em 1em 0em 1em;
+}
+main .part-recipes article .name-and-time {
+  justify-content: space-between;
 }
 main .part-recipes article .name-and-time h2, main .part-recipes article .name-and-time .h2 {
   font-size: 1.12em;
@@ -11366,6 +11370,17 @@ main .part-recipes article .ingredients-and-description {
 }
 main .part-recipes article .ingredients-and-description .ingredients {
   padding-right: 1em;
+}
+main .part-recipes article .ingredients-and-description .ingredients .ingredient {
+  margin-bottom: 0;
+}
+main .part-recipes article .ingredients-and-description .ingredients .ingredient .name-ingredient {
+  font-weight: bold;
+}
+main .part-recipes article .ingredients-and-description .description {
+  width: 15em;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .tags-container .tag-ingredients {

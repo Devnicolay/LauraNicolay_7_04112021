@@ -27,6 +27,7 @@ export class Dropdown {
     if (isExpanded === "false") {
       this.button.setAttribute("aria-expanded", "true");
     }
+    console.log(this.dropdown);
     this.dropdown.style.maxHeight = "23em";
     this.dropdown.style.width = "100em";
     this.filterElement();
@@ -36,10 +37,8 @@ export class Dropdown {
    * Display filtered elements of dropdown
    */
   filterElement() {
-    console.log(this.dataType);
     if (this.dataType == "ingredients") {
       const ingredients = new Set();
-      console.log(this.searchBar.recipesFiltered);
       this.searchBar.recipesFiltered.forEach((recipe) => {
         recipe.ingredients.forEach((ingredient) => {
           ingredients.add(ingredient.ingredient.toLowerCase());
@@ -48,11 +47,9 @@ export class Dropdown {
       this.createHtmlDropdown(Array.from(ingredients));
     }
     if (this.dataType == "appliances") {
-      console.log(this.searchBar.recipesFiltered);
       const appliances = new Set();
       this.searchBar.recipesFiltered.forEach((recipe) => {
         appliances.add(recipe.appliance.toLowerCase());
-        console.log(appliances);
       });
       this.createHtmlDropdown(Array.from(appliances));
     }
@@ -65,6 +62,30 @@ export class Dropdown {
       });
       this.createHtmlDropdown(Array.from(ustensils));
     }
+  }
+
+  filterElementsWithInput(valueInput) {
+    let elementsMatched = new Set();
+    this.searchBar.recipesFiltered.forEach((recipe) => {
+      if (this.dataType == "ingredients") {
+        recipe.ingredients.forEach((ingredient) => {
+          if (ingredient.ingredient.toLowerCase().includes(valueInput)) {
+            elementsMatched.add(ingredient.ingredient.toLowerCase());
+          }
+        });
+      } else if (this.dataType == "appliances") {
+        if (recipe.appliance.toLowerCase().includes(valueInput)) {
+          elementsMatched.add(recipe.appliance.toLowerCase());
+        }
+      } else if (this.dataType == "ustensils") {
+        recipe.ustensils.forEach((ustensil) => {
+          if (ustensil.toLowerCase().includes(valueInput)) {
+            elementsMatched.add(ustensil.toLowerCase());
+          }
+        });
+      }
+    });
+    this.createHtmlDropdown(Array.from(elementsMatched));
   }
 
   /**
@@ -98,43 +119,11 @@ export class Dropdown {
     const chevronUp = document.querySelector(
       `.arrow-${this.dataType} .fa-chevron-up`
     );
-    // filter elements with value of searchBar
-    const searchBar = document.getElementById("research");
-    const valueInput = searchBar.value.toLowerCase();
-    this.filterElementInDropdown(valueInput);
-
     // close dropdown
     chevronUp.addEventListener("click", () => this.closeDropdown());
     this.ul.focus();
-    this.ul.addEventListener("blur", () => {
-      this.closeDropdown();
-    });
-    this.intiListeners();
-  }
 
-  /**
-   *
-   * @param {string} valueInput Value of input dropdown
-   * Display elements in dropdown wich include the value of input
-   */
-  filterElementInDropdown(valueInput) {
-    const isExpanded = this.button.getAttribute(`aria-expanded`);
-    if (isExpanded === "false") {
-      this.button.setAttribute("aria-expanded", "true");
-    }
-    const li = Array.from(
-      document.querySelectorAll(
-        `.nav-list-${this.dataType} .li-${this.dataType}`
-      )
-    );
-    li.forEach((element) => {
-      const data = element.getAttribute(`data-${this.dataType}`);
-      if (data.includes(valueInput)) {
-        element.style.display = "block";
-      } else {
-        element.style.display = "none";
-      }
-    });
+    this.intiListeners();
   }
 
   /**

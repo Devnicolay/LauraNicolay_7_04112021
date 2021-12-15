@@ -3,6 +3,10 @@ import { Recipe } from "./recipes.js";
 import { Dropdown } from "./dropdown.js";
 import { Search } from "./searchBar.js";
 
+const ingredients = new Set();
+const appliances = new Set();
+const ustensils = new Set();
+
 /**
  * Display all recipes when the page loads
  */
@@ -22,9 +26,6 @@ export class HomePage {
     });
 
     // Generate array of ingredients, array of appliances and array of ustensils
-    const ingredients = new Set();
-    const appliances = new Set();
-    const ustensils = new Set();
     recipes.forEach((recipe) => {
       recipe.ingredients.forEach((ingredient) => {
         ingredients.add(ingredient.ingredient);
@@ -42,7 +43,6 @@ export class HomePage {
       ".arrow-ingredients .fa-chevron-down"
     );
     chevronDownIngredients.addEventListener("click", () => {
-      console.log(this.selectedTags);
       dataTypeDropdown = "ingredients";
       new Dropdown(
         dataTypeDropdown,
@@ -132,18 +132,40 @@ export class HomePage {
   initListenersInputDropdown(input, dataTypeDropdown) {
     input.addEventListener("keydown", (e) => {
       if (e.target.value.length >= 3) {
-        console.log(dataTypeDropdown);
         const searchBar = document.getElementById(`search-${dataTypeDropdown}`);
         const valueInput = searchBar.value.toLowerCase();
         const ul = document.querySelector(`.nav-list-${dataTypeDropdown}`);
         ul.innerHTML = "";
-        const newDropdown = new Dropdown(
+        const newSearchBar = new Search(
+          recipes,
           dataTypeDropdown,
-          this.arrayIngredients,
-          this.arrayAppliances,
-          this.arrayUstensils
+          this.selectedTags
         );
-        newDropdown.filterElementInDropdown(valueInput);
+        if (dataTypeDropdown == "ingredients") {
+          const dropdown = new Dropdown(
+            dataTypeDropdown,
+            Array.from(ingredients),
+            this.selectedTags,
+            newSearchBar
+          );
+          dropdown.filterElementsWithInput(valueInput);
+        } else if (dataTypeDropdown == "appliances") {
+          const dropdown = new Dropdown(
+            dataTypeDropdown,
+            Array.from(appliances),
+            this.selectedTags,
+            newSearchBar
+          );
+          dropdown.filterElementsWithInput(valueInput);
+        } else if (dataTypeDropdown == "ustensils") {
+          const dropdown = new Dropdown(
+            dataTypeDropdown,
+            Array.from(ustensils),
+            this.selectedTags,
+            newSearchBar
+          );
+          dropdown.filterElementsWithInput(valueInput);
+        }
       }
     });
   }

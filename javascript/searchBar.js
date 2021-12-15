@@ -95,8 +95,6 @@ export class Search {
         return shouldBeKept;
       });
     }
-    console.log(this.selectedTag.size);
-    console.log(this.recipesFiltered);
 
     const mainMsgError = document.querySelector(".msg-error");
     if (recipesFiltered.length === 0) {

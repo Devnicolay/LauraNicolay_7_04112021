@@ -10,8 +10,8 @@ main {
     flex-wrap: wrap;
     gap: 3em;
     article {
-      max-width: 20em;
-      max-height: 20em;
+      width: 23em;
+      height: 22.75em;
       background-color: $secondary;
       border-radius: 0.3em;
       overflow: hidden;
@@ -24,9 +24,10 @@ main {
       .ingredients-and-description {
         display: flex;
         justify-content: space-between;
-        padding: 1em;
+        padding: 1em 1em 0em 1em;
       }
       .name-and-time {
+        justify-content: space-between;
         h2 {
           font-size: 1.12em;
           color: $black;
@@ -39,6 +40,17 @@ main {
         font-size: 0.7em;
         .ingredients {
           padding-right: 1em;
+          .ingredient {
+            margin-bottom: 0;
+            .name-ingredient {
+              font-weight: bold;
+            }
+          }
+        }
+        .description {
+          width: 15em;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
       }
     }
