@@ -44,9 +44,12 @@ export class Recipe {
           const unitHtml = ingredient.unit
             ? `<span class="unit" data-unit="${ingredient.unit}">${ingredient.unit}</span>`
             : "";
+          const quantity = ingredient.quantity
+            ? `<span class="quantity" data-quantity="${ingredient.quantity}">${ingredient.quantity}</span>`
+            : "";
           return `<p class="ingredient" data-ingredient="${ingredient.ingredient.toLowerCase()}"><span class="name-ingredient">${
             ingredient.ingredient
-          }</span> : ${ingredient.quantity} ${unitHtml}</p>`;
+          }</span> : ${quantity} ${unitHtml}</p>`;
         })
         .join("") +
       ` </div>

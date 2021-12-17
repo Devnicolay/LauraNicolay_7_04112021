@@ -30,6 +30,7 @@ export class Dropdown {
     console.log(this.dropdown);
     this.dropdown.style.maxHeight = "23em";
     this.dropdown.style.width = "100em";
+    this.dropdown.style.flexGrow = "4";
     this.filterElement();
   }
 
@@ -100,6 +101,7 @@ export class Dropdown {
     );
     chevronDown.addEventListener("click", () => this.openDropdown());
     this.dropdown.style.width = "9em";
+    this.dropdown.style.flexGrow = "1";
   }
 
   /**
@@ -119,11 +121,23 @@ export class Dropdown {
     const chevronUp = document.querySelector(
       `.arrow-${this.dataType} .fa-chevron-up`
     );
+    this.label.style.display = "none";
+    this.input.style.display = "block";
+
+    const body = document.querySelector("body");
+    body.addEventListener("click", (e) => {
+      if (e.target.classList == `.li-${this.dataType}`) {
+        console.log("test ok");
+      }
+    });
+    this.input.focus();
     // close dropdown
     chevronUp.addEventListener("click", () => this.closeDropdown());
-    this.ul.focus();
-
     this.intiListeners();
+    this.input.addEventListener("blur", () => {
+      this.closeDropdown();
+    });
+    this.initListenersInput();
   }
 
   /**
@@ -148,7 +162,27 @@ export class Dropdown {
           this.selectedTags
         );
         this.filterElement();
+        // empty searchbar of dropdown is more 3 characters and click on element on dropdown
+        if (this.input.value.length >= 3) {
+          this.input.value = "";
+        }
       });
+    });
+  }
+
+  /**
+   * Listeners of inputs dropdowns
+   */
+  initListenersInput() {
+    this.input.addEventListener("keydown", (e) => {
+      if (e.target.value.length >= 3) {
+        const searchBar = document.getElementById(`search-${this.dataType}`);
+        const valueInput = searchBar.value.toLowerCase();
+        const ul = document.querySelector(`.nav-list-${this.dataType}`);
+        ul.innerHTML = "";
+
+        this.filterElementsWithInput(valueInput);
+      }
     });
   }
 

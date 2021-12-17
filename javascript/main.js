@@ -115,7 +115,36 @@ export class HomePage {
   displayInput(label, input, dataTypeDropdown) {
     label.style.display = "none";
     input.style.display = "block";
-    this.initListenersInputDropdown(input, dataTypeDropdown);
+    const newSearchBar = new Search(
+      recipes,
+      dataTypeDropdown,
+      this.selectedTags
+    );
+    if (dataTypeDropdown == "ingredients") {
+      const dropdown = new Dropdown(
+        dataTypeDropdown,
+        Array.from(ingredients),
+        this.selectedTags,
+        newSearchBar
+      );
+      dropdown.initListenersInput();
+    } else if (dataTypeDropdown == "appliances") {
+      const dropdown = new Dropdown(
+        dataTypeDropdown,
+        Array.from(appliances),
+        this.selectedTags,
+        newSearchBar
+      );
+      dropdown.initListenersInput();
+    } else if (dataTypeDropdown == "ustensils") {
+      const dropdown = new Dropdown(
+        dataTypeDropdown,
+        Array.from(ustensils),
+        this.selectedTags,
+        newSearchBar
+      );
+      dropdown.initListenersInput();
+    }
   }
 
   /**
@@ -124,50 +153,6 @@ export class HomePage {
   undisplayInput(label, input) {
     input.style.display = "none";
     label.style.display = "block";
-  }
-
-  /**
-   * Listeners of inputs dropdowns
-   */
-  initListenersInputDropdown(input, dataTypeDropdown) {
-    input.addEventListener("keydown", (e) => {
-      if (e.target.value.length >= 3) {
-        const searchBar = document.getElementById(`search-${dataTypeDropdown}`);
-        const valueInput = searchBar.value.toLowerCase();
-        const ul = document.querySelector(`.nav-list-${dataTypeDropdown}`);
-        ul.innerHTML = "";
-        const newSearchBar = new Search(
-          recipes,
-          dataTypeDropdown,
-          this.selectedTags
-        );
-        if (dataTypeDropdown == "ingredients") {
-          const dropdown = new Dropdown(
-            dataTypeDropdown,
-            Array.from(ingredients),
-            this.selectedTags,
-            newSearchBar
-          );
-          dropdown.filterElementsWithInput(valueInput);
-        } else if (dataTypeDropdown == "appliances") {
-          const dropdown = new Dropdown(
-            dataTypeDropdown,
-            Array.from(appliances),
-            this.selectedTags,
-            newSearchBar
-          );
-          dropdown.filterElementsWithInput(valueInput);
-        } else if (dataTypeDropdown == "ustensils") {
-          const dropdown = new Dropdown(
-            dataTypeDropdown,
-            Array.from(ustensils),
-            this.selectedTags,
-            newSearchBar
-          );
-          dropdown.filterElementsWithInput(valueInput);
-        }
-      }
-    });
   }
 }
 

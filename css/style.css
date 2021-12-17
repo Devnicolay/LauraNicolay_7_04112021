@@ -99,7 +99,7 @@ hr:not([size]) {
 h6, .h6, h5, .h5, h4, .h4, h3, .h3, h2, .h2, h1, .h1 {
   margin-top: 0;
   margin-bottom: 0.5rem;
-  font-family: Lato;
+  font-family: Lato_Light;
   font-weight: 500;
   line-height: 1.2;
 }
@@ -11120,44 +11120,26 @@ textarea.form-control-lg {
   }
 }
 @font-face {
-  font-family: DM_Sans;
-  src: url(/css/font/DM-Sans/DMSans-Bold.ttf);
-  src: url(/css/font/DM-Sans/DMSans-BoldItalic.ttf);
-  src: url(/css/font/DM-Sans/DMSans-Italic.ttf);
-  src: url(/css/font/DM-Sans/DMSans-Medium.ttf);
-  src: url(/css/font/DM-Sans/DMSans-MediumItalic.ttf);
+  font-family: DM_Sans_Regular;
   src: url(/css/font/DM-Sans/DMSans-Regular.ttf);
 }
 @font-face {
-  font-family: Lato;
-  src: url(/css/font/Lato/Lato-Black.ttf);
-  src: url(/css/font/Lato/Lato-BlackItalic.ttf);
+  font-family: Lato_Bold;
   src: url(/css/font/Lato/Lato-Bold.ttf);
-  src: url(/css/font/Lato/Lato-BoldItalic.ttf);
-  src: url(/css/font/Lato/Lato-Italic.ttf);
-  src: url(/css/font/Lato/Lato-Light.ttf);
-  src: url(/css/font/Lato/Lato-LightItalic.ttf);
-  src: url(/css/font/Lato/Lato-Regular.ttf);
-  src: url(/css/font/Lato/Lato-Thin.ttf);
-  src: url(/css/font/Lato/Lato-ThinItalic.ttf);
 }
 @font-face {
-  font-family: Roboto;
-  src: url(/css/font/roboto/Roboto-Black.ttf);
-  src: url(/css/font/roboto/Roboto-BlackItalic.ttf);
-  src: url(/css/font/roboto/Roboto-Bold.ttf);
-  src: url(/css/font/roboto/Roboto-BoldItalic.ttf);
-  src: url(/css/font/roboto/Roboto-Italic.ttf);
-  src: url(/css/font/roboto/Roboto-Light.ttf);
-  src: url(/css/font/roboto/Roboto-LightItalic.ttf);
-  src: url(/css/font/roboto/Roboto-Medium.ttf);
-  src: url(/css/font/roboto/Roboto-MediumItalic.ttf);
+  font-family: Lato_Light;
+  src: url(/css/font/Lato/Lato-Light.ttf);
+}
+@font-face {
+  font-family: Roboto_Regular;
   src: url(/css/font/roboto/Roboto-Regular.ttf);
-  src: url(/css/font/roboto/Roboto-Thin.ttf);
-  src: url(/css/font/roboto/Roboto-ThinItalic.ttf);
 }
 body h1, body .h1 {
   font-family: DM_Sans;
+}
+body main article .description {
+  font-family: Roboto_Regular;
 }
 
 header .banner {
@@ -11203,6 +11185,9 @@ header .search-bar form .button .fa-search {
   font-size: 1.4em;
 }
 
+header .nav-dropdown-container {
+  max-width: 100%;
+}
 header .nav-dropdown-container button {
   color: white;
   border: transparent;
@@ -11328,6 +11313,9 @@ header .nav-dropdown-ustensils button #search-ustensils {
   background-color: #ed6454;
 }
 
+main {
+  padding-top: 1.5em;
+}
 main .msg-error .msg-no-recipe {
   font-size: 2em;
   padding-top: 2em;
@@ -11339,7 +11327,7 @@ main .part-recipes {
 }
 main .part-recipes article {
   width: 23em;
-  height: 22.75em;
+  height: 23.5em;
   background-color: #e7e7e7;
   border-radius: 0.3em;
   overflow: hidden;
@@ -11359,17 +11347,19 @@ main .part-recipes article .name-and-time {
   justify-content: space-between;
 }
 main .part-recipes article .name-and-time h2, main .part-recipes article .name-and-time .h2 {
-  font-size: 1.12em;
+  font-size: 1.3em;
   color: black;
+  font-weight: bold;
 }
 main .part-recipes article .name-and-time p {
   font-weight: bold;
 }
 main .part-recipes article .ingredients-and-description {
+  padding-top: 0;
   font-size: 0.7em;
 }
 main .part-recipes article .ingredients-and-description .ingredients {
-  padding-right: 1em;
+  padding: 0em 1em 0em 0.5em;
 }
 main .part-recipes article .ingredients-and-description .ingredients .ingredient {
   margin-bottom: 0;
@@ -11379,8 +11369,10 @@ main .part-recipes article .ingredients-and-description .ingredients .ingredient
 }
 main .part-recipes article .ingredients-and-description .description {
   width: 15em;
+  display: -webkit-box;
+  -webkit-line-clamp: 7;
+  -webkit-box-orient: vertical;
   overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .tags-container .tag-ingredients {

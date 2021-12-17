@@ -97,7 +97,7 @@ export class Search {
     }
 
     const mainMsgError = document.querySelector(".msg-error");
-    if (recipesFiltered.length === 0) {
+    if (recipesFiltered.length === 0 || this.recipesFiltered.length === 0) {
       mainMsgError.innerHTML = `<p class="msg-no-recipe">Aucune recette ne correspond à votre critère… vous pouvez
     chercher « tarte aux pommes », « poisson », etc.</p>`;
     } else {

@@ -1,45 +1,32 @@
 @font-face {
-  font-family: DM_Sans;
-  src: url(/css/font/DM-Sans/DMSans-Bold.ttf);
-  src: url(/css/font/DM-Sans/DMSans-BoldItalic.ttf);
-  src: url(/css/font/DM-Sans/DMSans-Italic.ttf);
-  src: url(/css/font/DM-Sans/DMSans-Medium.ttf);
-  src: url(/css/font/DM-Sans/DMSans-MediumItalic.ttf);
+  font-family: DM_Sans_Regular;
   src: url(/css/font/DM-Sans/DMSans-Regular.ttf);
 }
 
 @font-face {
-  font-family: Lato;
-  src: url(/css/font/Lato/Lato-Black.ttf);
-  src: url(/css/font/Lato/Lato-BlackItalic.ttf);
+  font-family: Lato_Bold;
   src: url(/css/font/Lato/Lato-Bold.ttf);
-  src: url(/css/font/Lato/Lato-BoldItalic.ttf);
-  src: url(/css/font/Lato/Lato-Italic.ttf);
-  src: url(/css/font/Lato/Lato-Light.ttf);
-  src: url(/css/font/Lato/Lato-LightItalic.ttf);
-  src: url(/css/font/Lato/Lato-Regular.ttf);
-  src: url(/css/font/Lato/Lato-Thin.ttf);
-  src: url(/css/font/Lato/Lato-ThinItalic.ttf);
 }
 
 @font-face {
-  font-family: Roboto;
-  src: url(/css/font/roboto/Roboto-Black.ttf);
-  src: url(/css/font/roboto/Roboto-BlackItalic.ttf);
-  src: url(/css/font/roboto/Roboto-Bold.ttf);
-  src: url(/css/font/roboto/Roboto-BoldItalic.ttf);
-  src: url(/css/font/roboto/Roboto-Italic.ttf);
-  src: url(/css/font/roboto/Roboto-Light.ttf);
-  src: url(/css/font/roboto/Roboto-LightItalic.ttf);
-  src: url(/css/font/roboto/Roboto-Medium.ttf);
-  src: url(/css/font/roboto/Roboto-MediumItalic.ttf);
+  font-family: Lato_Light;
+  src: url(/css/font/Lato/Lato-Light.ttf);
+}
+
+@font-face {
+  font-family: Roboto_Regular;
   src: url(/css/font/roboto/Roboto-Regular.ttf);
-  src: url(/css/font/roboto/Roboto-Thin.ttf);
-  src: url(/css/font/roboto/Roboto-ThinItalic.ttf);
 }
 
 body {
   h1 {
     font-family: DM_Sans;
+  }
+  main {
+    article {
+      .description {
+        font-family: Roboto_Regular;
+      }
+    }
   }
 }
