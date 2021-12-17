@@ -127,16 +127,12 @@ export class Dropdown {
     );
     this.label.style.display = "none";
     this.input.style.display = "block";
-    this.input.focus();
-
-    const body = document.querySelector("body");
-    body.addEventListener("click", (e) => {
-      if (e.target.classList == `.li-${this.dataType}`) {
-        console.log("test ok");
-      }
-    });
+    this.dropdown.focus();
     // close dropdown
     chevronUp.addEventListener("click", () => this.closeDropdown());
+    this.dropdown.addEventListener("blur", () => {
+      this.closeDropdown();
+    });
     this.initListeners();
     this.initListenersInput();
   }
