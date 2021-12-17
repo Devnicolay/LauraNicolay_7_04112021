@@ -11158,9 +11158,6 @@ header .banner a h1, header .banner a .h1 {
   color: #d04f4f;
 }
 
-header .search-bar {
-  margin-bottom: 1em;
-}
 header .search-bar form {
   display: flex;
   background-color: #e7e7e7;
@@ -11188,55 +11185,58 @@ header .search-bar form .button .fa-search {
 header .nav-dropdown-container {
   max-width: 100%;
 }
-header .nav-dropdown-container button {
+header .nav-dropdown-container .button-tags {
+  text-decoration: none;
   color: white;
   border: transparent;
   border-radius: 0.3em;
   width: 8em;
   margin-top: 1em;
 }
-header .nav-dropdown-container button .fa-chevron-down {
+header .nav-dropdown-container .button-tags .fa-chevron-down {
   margin-left: 1em;
+  padding-right: 1em;
 }
-header .nav-dropdown-container button .fa-chevron-up {
+header .nav-dropdown-container .button-tags .fa-chevron-up {
   margin-left: 1em;
 }
 header .nav-dropdown-ingredients,
 header .nav-dropdown-appliances,
 header .nav-dropdown-ustensils {
-  margin: 0em 2em;
+  margin: 1em 2em;
   border-radius: 0.3em;
   max-height: 4em;
-  width: 8em;
+  width: 9em;
+  min-width: 9em;
   overflow: scroll;
 }
-header .nav-dropdown-ingredients button,
-header .nav-dropdown-appliances button,
-header .nav-dropdown-ustensils button {
+header .nav-dropdown-ingredients .button-tags,
+header .nav-dropdown-appliances .button-tags,
+header .nav-dropdown-ustensils .button-tags {
   display: flex;
 }
-header .nav-dropdown-ingredients button #search-ingredients,
-header .nav-dropdown-ingredients button #search-appliances,
-header .nav-dropdown-ingredients button #search-ustensils,
-header .nav-dropdown-appliances button #search-ingredients,
-header .nav-dropdown-appliances button #search-appliances,
-header .nav-dropdown-appliances button #search-ustensils,
-header .nav-dropdown-ustensils button #search-ingredients,
-header .nav-dropdown-ustensils button #search-appliances,
-header .nav-dropdown-ustensils button #search-ustensils {
+header .nav-dropdown-ingredients .button-tags #search-ingredients,
+header .nav-dropdown-ingredients .button-tags #search-appliances,
+header .nav-dropdown-ingredients .button-tags #search-ustensils,
+header .nav-dropdown-appliances .button-tags #search-ingredients,
+header .nav-dropdown-appliances .button-tags #search-appliances,
+header .nav-dropdown-appliances .button-tags #search-ustensils,
+header .nav-dropdown-ustensils .button-tags #search-ingredients,
+header .nav-dropdown-ustensils .button-tags #search-appliances,
+header .nav-dropdown-ustensils .button-tags #search-ustensils {
   border: none;
   display: none;
   color: white;
 }
-header .nav-dropdown-ingredients button #search-ingredients::placeholder,
-header .nav-dropdown-ingredients button #search-appliances::placeholder,
-header .nav-dropdown-ingredients button #search-ustensils::placeholder,
-header .nav-dropdown-appliances button #search-ingredients::placeholder,
-header .nav-dropdown-appliances button #search-appliances::placeholder,
-header .nav-dropdown-appliances button #search-ustensils::placeholder,
-header .nav-dropdown-ustensils button #search-ingredients::placeholder,
-header .nav-dropdown-ustensils button #search-appliances::placeholder,
-header .nav-dropdown-ustensils button #search-ustensils::placeholder {
+header .nav-dropdown-ingredients .button-tags #search-ingredients::placeholder,
+header .nav-dropdown-ingredients .button-tags #search-appliances::placeholder,
+header .nav-dropdown-ingredients .button-tags #search-ustensils::placeholder,
+header .nav-dropdown-appliances .button-tags #search-ingredients::placeholder,
+header .nav-dropdown-appliances .button-tags #search-appliances::placeholder,
+header .nav-dropdown-appliances .button-tags #search-ustensils::placeholder,
+header .nav-dropdown-ustensils .button-tags #search-ingredients::placeholder,
+header .nav-dropdown-ustensils .button-tags #search-appliances::placeholder,
+header .nav-dropdown-ustensils .button-tags #search-ustensils::placeholder {
   color: white;
   opacity: 0.5;
 }
@@ -11288,33 +11288,63 @@ header .nav-dropdown-ustensils .nav-list-ustensils .li-ustensils {
 header .nav-dropdown-ingredients {
   background-color: #3282f7;
 }
-header .nav-dropdown-ingredients button {
+header .nav-dropdown-ingredients .button-tags {
   background-color: #3282f7;
 }
-header .nav-dropdown-ingredients button #search-ingredients {
+header .nav-dropdown-ingredients .button-tags #search-ingredients {
   background-color: #3282f7;
 }
 header .nav-dropdown-appliances {
   background-color: #68d9a4;
 }
-header .nav-dropdown-appliances button {
+header .nav-dropdown-appliances .button-tags {
   background-color: #68d9a4;
 }
-header .nav-dropdown-appliances button #search-appliances {
+header .nav-dropdown-appliances .button-tags #search-appliances {
   background-color: #68d9a4;
 }
 header .nav-dropdown-ustensils {
   background-color: #ed6454;
 }
-header .nav-dropdown-ustensils button {
+header .nav-dropdown-ustensils .button-tags {
   background-color: #ed6454;
 }
-header .nav-dropdown-ustensils button #search-ustensils {
+header .nav-dropdown-ustensils .button-tags #search-ustensils {
   background-color: #ed6454;
 }
 
-main {
-  padding-top: 1.5em;
+/* For screen smaller than 992px */
+@media screen and (max-width: 992px) {
+  header .nav-dropdown-ingredients .button-tags #search-ingredients,
+header .nav-dropdown-ingredients .button-tags #search-appliances,
+header .nav-dropdown-ingredients .button-tags #search-ustensils,
+header .nav-dropdown-appliances .button-tags #search-ingredients,
+header .nav-dropdown-appliances .button-tags #search-appliances,
+header .nav-dropdown-appliances .button-tags #search-ustensils,
+header .nav-dropdown-ustensils .button-tags #search-ingredients,
+header .nav-dropdown-ustensils .button-tags #search-appliances,
+header .nav-dropdown-ustensils .button-tags #search-ustensils {
+    font-size: 0.8em;
+  }
+  header .nav-dropdown-ingredients .nav-list-ingredients,
+header .nav-dropdown-ingredients .nav-list-appliances,
+header .nav-dropdown-ingredients .nav-list-ustensils,
+header .nav-dropdown-appliances .nav-list-ingredients,
+header .nav-dropdown-appliances .nav-list-appliances,
+header .nav-dropdown-appliances .nav-list-ustensils,
+header .nav-dropdown-ustensils .nav-list-ingredients,
+header .nav-dropdown-ustensils .nav-list-appliances,
+header .nav-dropdown-ustensils .nav-list-ustensils {
+    display: flex;
+    flex-direction: column;
+  }
+}
+/* For screen smaller than 770px */
+@media screen and (max-width: 770px) {
+  header .nav-dropdown-container {
+    display: flex;
+    flex-direction: column;
+  }
 }
 main .msg-error .msg-no-recipe {
   font-size: 2em;
@@ -11375,6 +11405,9 @@ main .part-recipes article .ingredients-and-description .description {
   overflow: hidden;
 }
 
+.tags-container {
+  margin-top: 1em;
+}
 .tags-container .tag-ingredients {
   background-color: #3282f7;
 }

@@ -44,115 +44,52 @@ export class HomePage {
     );
     chevronDownIngredients.addEventListener("click", () => {
       dataTypeDropdown = "ingredients";
-      new Dropdown(
-        dataTypeDropdown,
-        Array.from(ingredients),
-        this.selectedTags,
-        searchBar
-      );
+      this.newDropdown(dataTypeDropdown, searchBar);
+    });
+    const inputIngredients = document.querySelector("#search-ingredients");
+    inputIngredients.addEventListener("click", () => {
+      dataTypeDropdown = "ingredients";
+      this.newDropdown(dataTypeDropdown, searchBar);
     });
     const chevronDownAppliances = document.querySelector(
       ".arrow-appliances .fa-chevron-down"
     );
     chevronDownAppliances.addEventListener("click", () => {
       dataTypeDropdown = "appliances";
-      new Dropdown(
-        dataTypeDropdown,
-        Array.from(appliances),
-        this.selectedTags,
-        searchBar
-      );
+      this.newDropdown(dataTypeDropdown, searchBar);
+    });
+    const inputAppliances = document.querySelector("#search-appliances");
+    inputAppliances.addEventListener("click", () => {
+      dataTypeDropdown = "appliances";
+      this.newDropdown(dataTypeDropdown, searchBar);
     });
     const chevronDownUstensils = document.querySelector(
       ".arrow-ustensils .fa-chevron-down"
     );
     chevronDownUstensils.addEventListener("click", () => {
       dataTypeDropdown = "ustensils";
-      new Dropdown(
-        dataTypeDropdown,
-        Array.from(ustensils),
-        this.selectedTags,
-        searchBar
-      );
+      this.newDropdown(dataTypeDropdown, searchBar);
     });
-
-    // Part label / input dropdowns
-    // Ingredients
-    const labelIngredient = document.querySelector("#label-ingredients");
-    const inputIngredient = document.querySelector("#search-ingredients");
-    labelIngredient.addEventListener("click", () => {
-      dataTypeDropdown = "ingredients";
-      this.displayInput(labelIngredient, inputIngredient, dataTypeDropdown);
-    });
-    inputIngredient.addEventListener("blur", () => {
-      this.undisplayInput(labelIngredient, inputIngredient);
-    });
-    // Appliances
-    const labelAppliance = document.querySelector("#label-appliances");
-    const inputAppliance = document.querySelector("#search-appliances");
-    labelAppliance.addEventListener("click", () => {
-      dataTypeDropdown = "appliances";
-      this.displayInput(labelAppliance, inputAppliance, dataTypeDropdown);
-    });
-    inputAppliance.addEventListener("blur", () => {
-      this.undisplayInput(labelAppliance, inputAppliance);
-    });
-    // Ustensils
-    const labelUstensil = document.querySelector("#label-ustensils");
-    const inputUstensil = document.querySelector("#search-ustensils");
-    labelUstensil.addEventListener("click", () => {
+    const inputUstensils = document.querySelector("#search-ustensils");
+    inputUstensils.addEventListener("click", () => {
       dataTypeDropdown = "ustensils";
-      this.displayInput(labelUstensil, inputUstensil, dataTypeDropdown);
-    });
-    inputUstensil.addEventListener("blur", () => {
-      this.undisplayInput(labelUstensil, inputUstensil);
+      this.newDropdown(dataTypeDropdown, searchBar);
     });
   }
 
   /**
-   * Display input when click on word of type list in button
+   *
+   * @param {string} dataTypeDropdown Data type of dropdown
+   * @param {instance} searchBar Instance of SearchBar
+   * Instance of Dropdown
    */
-  displayInput(label, input, dataTypeDropdown) {
-    label.style.display = "none";
-    input.style.display = "block";
-    const newSearchBar = new Search(
-      recipes,
+  newDropdown(dataTypeDropdown, searchBar) {
+    new Dropdown(
       dataTypeDropdown,
-      this.selectedTags
+      Array.from(dataTypeDropdown),
+      this.selectedTags,
+      searchBar
     );
-    if (dataTypeDropdown == "ingredients") {
-      const dropdown = new Dropdown(
-        dataTypeDropdown,
-        Array.from(ingredients),
-        this.selectedTags,
-        newSearchBar
-      );
-      dropdown.initListenersInput();
-    } else if (dataTypeDropdown == "appliances") {
-      const dropdown = new Dropdown(
-        dataTypeDropdown,
-        Array.from(appliances),
-        this.selectedTags,
-        newSearchBar
-      );
-      dropdown.initListenersInput();
-    } else if (dataTypeDropdown == "ustensils") {
-      const dropdown = new Dropdown(
-        dataTypeDropdown,
-        Array.from(ustensils),
-        this.selectedTags,
-        newSearchBar
-      );
-      dropdown.initListenersInput();
-    }
-  }
-
-  /**
-   * Undisplay input when quite input focus
-   */
-  undisplayInput(label, input) {
-    input.style.display = "none";
-    label.style.display = "block";
   }
 }
 

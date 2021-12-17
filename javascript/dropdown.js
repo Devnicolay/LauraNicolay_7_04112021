@@ -7,16 +7,13 @@ export class Dropdown {
     this.tags = tags;
     this.dataType = dataTypeDropdown;
     this.chevron = document.querySelector(`.arrow-${this.dataType}`);
-    this.chevronDown = document.querySelector(
-      `.arrow-${this.dataType} .fa-chevron-down`
-    );
     this.dropdown = document.querySelector(`.nav-dropdown-${this.dataType}`);
     this.label = document.querySelector(`#label-${this.dataType}`);
     this.input = document.querySelector(`#search-${this.dataType}`);
     this.button = document.querySelector(`#button-${this.dataType}`);
     this.ul = document.querySelector(`.nav-list-${this.dataType}`);
-    this.tagsContainer = document.querySelector(`.tags-container`);
     this.openDropdown();
+    this.closeDropdownIfClickOnSearchBar();
   }
 
   /**
@@ -27,7 +24,6 @@ export class Dropdown {
     if (isExpanded === "false") {
       this.button.setAttribute("aria-expanded", "true");
     }
-    console.log(this.dropdown);
     this.dropdown.style.maxHeight = "23em";
     this.dropdown.style.width = "100em";
     this.dropdown.style.flexGrow = "4";
@@ -65,6 +61,11 @@ export class Dropdown {
     }
   }
 
+  /**
+   *
+   * @param {string} valueInput
+   * Display filtered elements of dropdown with value of input of dropdown
+   */
   filterElementsWithInput(valueInput) {
     let elementsMatched = new Set();
     this.searchBar.recipesFiltered.forEach((recipe) => {
@@ -102,6 +103,9 @@ export class Dropdown {
     chevronDown.addEventListener("click", () => this.openDropdown());
     this.dropdown.style.width = "9em";
     this.dropdown.style.flexGrow = "1";
+    this.dropdown.style.maxHeight = "3.5em";
+    this.label.style.display = "block";
+    this.input.style.display = "none";
   }
 
   /**
@@ -123,6 +127,7 @@ export class Dropdown {
     );
     this.label.style.display = "none";
     this.input.style.display = "block";
+    this.input.focus();
 
     const body = document.querySelector("body");
     body.addEventListener("click", (e) => {
@@ -130,20 +135,16 @@ export class Dropdown {
         console.log("test ok");
       }
     });
-    this.input.focus();
     // close dropdown
     chevronUp.addEventListener("click", () => this.closeDropdown());
-    this.intiListeners();
-    this.input.addEventListener("blur", () => {
-      this.closeDropdown();
-    });
+    this.initListeners();
     this.initListenersInput();
   }
 
   /**
    * Listeners when click on element of dropdown
    */
-  intiListeners() {
+  initListeners() {
     const li = Array.from(
       document.querySelectorAll(
         `.nav-list-${this.dataType} .li-${this.dataType}`
@@ -178,10 +179,11 @@ export class Dropdown {
       if (e.target.value.length >= 3) {
         const searchBar = document.getElementById(`search-${this.dataType}`);
         const valueInput = searchBar.value.toLowerCase();
-        const ul = document.querySelector(`.nav-list-${this.dataType}`);
-        ul.innerHTML = "";
+        this.ul.innerHTML = "";
 
         this.filterElementsWithInput(valueInput);
+      } else if (e.target.value.length >= 1) {
+        this.ul.innerHTML = "";
       }
     });
   }
@@ -203,13 +205,13 @@ export class Dropdown {
     tagsContainer.appendChild(tag);
     this.searchBar.recipesFilteredWithInput();
     this.openDropdown();
-    this.removeTag();
+    this.initRemoveTagListener();
   }
 
   /**
    * Remove tag with cross of tag
    */
-  removeTag() {
+  initRemoveTagListener() {
     const crossTag = document.querySelectorAll(".fa-times-circle");
     crossTag.forEach((cross) => {
       cross.addEventListener("click", () => {
@@ -226,11 +228,20 @@ export class Dropdown {
               this.selectedTags
             );
             this.searchBar.recipesFilteredWithInput();
-            this.openDropdown();
-            this.removeTag();
+            this.closeDropdown();
           }
         });
       });
+    });
+  }
+
+  /**
+   * Close dropdown when click on SearchBar
+   */
+  closeDropdownIfClickOnSearchBar() {
+    const domSearchBar = document.querySelector(".search-bar");
+    domSearchBar.addEventListener("click", () => {
+      this.closeDropdown();
     });
   }
 }

@@ -1,7 +1,8 @@
 header {
   .nav-dropdown-container {
     max-width: 100%;
-    button {
+    .button-tags {
+      text-decoration: none;
       color: white;
       border: transparent;
       border-radius: 0.3em;
@@ -9,6 +10,7 @@ header {
       margin-top: 1em;
       .fa-chevron-down {
         margin-left: 1em;
+        padding-right: 1em;
       }
       .fa-chevron-up {
         margin-left: 1em;
@@ -18,12 +20,13 @@ header {
   .nav-dropdown-ingredients,
   .nav-dropdown-appliances,
   .nav-dropdown-ustensils {
-    margin: 0em 2em;
+    margin: 1em 2em;
     border-radius: 0.3em;
     max-height: 4em;
-    width: 8em;
+    width: 9em;
+    min-width: 9em;
     overflow: scroll;
-    button {
+    .button-tags {
       display: flex;
       #search-ingredients,
       #search-appliances,
@@ -57,7 +60,7 @@ header {
   }
   .nav-dropdown-ingredients {
     background-color: $ingredient-color;
-    button {
+    .button-tags {
       background-color: $ingredient-color;
       #search-ingredients {
         background-color: $ingredient-color;
@@ -66,7 +69,7 @@ header {
   }
   .nav-dropdown-appliances {
     background-color: $appliance-color;
-    button {
+    .button-tags {
       background-color: $appliance-color;
       #search-appliances {
         background-color: $appliance-color;
@@ -75,11 +78,44 @@ header {
   }
   .nav-dropdown-ustensils {
     background-color: $ustensil-color;
-    button {
+    .button-tags {
       background-color: $ustensil-color;
       #search-ustensils {
         background-color: $ustensil-color;
       }
+    }
+  }
+}
+
+/* For screen smaller than 992px */
+@media screen and (max-width: 992px) {
+  header {
+    .nav-dropdown-ingredients,
+    .nav-dropdown-appliances,
+    .nav-dropdown-ustensils {
+      .button-tags {
+        #search-ingredients,
+        #search-appliances,
+        #search-ustensils {
+          font-size: 0.8em;
+        }
+      }
+      .nav-list-ingredients,
+      .nav-list-appliances,
+      .nav-list-ustensils {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+  }
+}
+
+/* For screen smaller than 770px */
+@media screen and (max-width: 770px) {
+  header {
+    .nav-dropdown-container {
+      display: flex;
+      flex-direction: column;
     }
   }
 }
