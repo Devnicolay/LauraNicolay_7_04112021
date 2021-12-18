@@ -13,7 +13,6 @@ export class Dropdown {
     this.button = document.querySelector(`#button-${this.dataType}`);
     this.ul = document.querySelector(`.nav-list-${this.dataType}`);
     this.openDropdown();
-    this.closeDropdownIfClickOnSearchBar();
   }
 
   /**
@@ -34,31 +33,27 @@ export class Dropdown {
    * Display filtered elements of dropdown
    */
   filterElement() {
+    let elementsFiltered = new Set();
     if (this.dataType == "ingredients") {
-      const ingredients = new Set();
       this.searchBar.recipesFiltered.forEach((recipe) => {
         recipe.ingredients.forEach((ingredient) => {
-          ingredients.add(ingredient.ingredient.toLowerCase());
+          elementsFiltered.add(ingredient.ingredient.toLowerCase());
         });
       });
-      this.createHtmlDropdown(Array.from(ingredients));
     }
     if (this.dataType == "appliances") {
-      const appliances = new Set();
       this.searchBar.recipesFiltered.forEach((recipe) => {
-        appliances.add(recipe.appliance.toLowerCase());
+        elementsFiltered.add(recipe.appliance.toLowerCase());
       });
-      this.createHtmlDropdown(Array.from(appliances));
     }
     if (this.dataType == "ustensils") {
-      const ustensils = new Set();
       this.searchBar.recipesFiltered.forEach((recipe) => {
         recipe.ustensils.forEach((ustensil) => {
-          ustensils.add(ustensil.toLowerCase());
+          elementsFiltered.add(ustensil.toLowerCase());
         });
       });
-      this.createHtmlDropdown(Array.from(ustensils));
     }
+    this.createHtmlDropdown(Array.from(elementsFiltered));
   }
 
   /**
@@ -127,10 +122,10 @@ export class Dropdown {
     );
     this.label.style.display = "none";
     this.input.style.display = "block";
-    this.dropdown.focus();
+    this.input.focus();
     // close dropdown
     chevronUp.addEventListener("click", () => this.closeDropdown());
-    this.dropdown.addEventListener("blur", () => {
+    this.input.addEventListener("blur", () => {
       this.closeDropdown();
     });
     this.initListeners();
@@ -228,16 +223,6 @@ export class Dropdown {
           }
         });
       });
-    });
-  }
-
-  /**
-   * Close dropdown when click on SearchBar
-   */
-  closeDropdownIfClickOnSearchBar() {
-    const domSearchBar = document.querySelector(".search-bar");
-    domSearchBar.addEventListener("click", () => {
-      this.closeDropdown();
     });
   }
 }
