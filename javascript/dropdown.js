@@ -125,11 +125,53 @@ export class Dropdown {
     this.input.focus();
     // close dropdown
     chevronUp.addEventListener("click", () => this.closeDropdown());
-    this.input.addEventListener("blur", () => {
+    this.initListeners();
+    this.closeDropdownIfClickOutside();
+    this.initListenersInput();
+  }
+
+  closeDropdownIfClickOutside() {
+    const dropdownIngredients = document.querySelector(
+      ".nav-dropdown-ingredients"
+    );
+    const dropdownAppliances = document.querySelector(
+      ".nav-dropdown-appliances"
+    );
+    const dropdownUstensils = document.querySelector(".nav-dropdown-ustensils");
+    if (this.dataType == "ingredients") {
+      dropdownAppliances.addEventListener("click", () => {
+        this.closeDropdown();
+      });
+      dropdownUstensils.addEventListener("click", () => {
+        this.closeDropdown();
+      });
+    } else if (this.dataType == "appliances") {
+      dropdownIngredients.addEventListener("click", () => {
+        this.closeDropdown();
+      });
+      dropdownUstensils.addEventListener("click", () => {
+        this.closeDropdown();
+      });
+    } else if (this.dataType == "ustensils") {
+      dropdownIngredients.addEventListener("click", () => {
+        this.closeDropdown();
+      });
+      dropdownAppliances.addEventListener("click", () => {
+        this.closeDropdown();
+      });
+    }
+    const banner = document.querySelector(".banner");
+    banner.addEventListener("click", () => {
       this.closeDropdown();
     });
-    this.initListeners();
-    this.initListenersInput();
+    const searchBar = document.querySelector(".search-bar");
+    searchBar.addEventListener("click", () => {
+      this.closeDropdown();
+    });
+    const main = document.querySelector("main");
+    main.addEventListener("click", () => {
+      this.closeDropdown();
+    });
   }
 
   /**
