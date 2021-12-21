@@ -33,46 +33,32 @@ export class Search {
    * Create an array of recipes that matches with search field
    */
   recipesFilteredWithInput() {
-    // start of code for solution 1
-    let recipesFiltered = [];
+    // start of code for solution 2
     const valueInput = searchBar.value.toLowerCase();
-    for (let i = 0; i < recipes.length; i++) {
-      const recipe = this.recipes[i];
+
+    const recipesFiltered = recipes.filter((recipe) => {
+      return (
+        recipe.name.toLowerCase().includes(valueInput.toLowerCase()) ||
+        recipe.description.toLowerCase().includes(valueInput.toLowerCase()) ||
+        recipe.ingredients.some((ingredient) =>
+          ingredient.ingredient.toLowerCase().includes(valueInput.toLowerCase())
+        )
+      );
+    });
+    const recipesDom = document.querySelectorAll("article");
+    recipesDom.forEach((recipe) => {
+      recipe.style.display = "none";
+    });
+    recipesFiltered.forEach((recipe) => {
       const recipeDom = document.querySelector(
         `article[data-id="${recipe.id}"]`
       );
-      const hasTheWantedName = recipe.name
-        .toLowerCase()
-        .includes(valueInput.toLowerCase());
-      const hasTheWantedDescription = recipe.description
-        .toLowerCase()
-        .includes(valueInput.toLowerCase());
-
-      const ingredients = recipe.ingredients;
-
-      let hasTheWantedIngredient = false;
-      for (let j = 0; j < ingredients.length; j++) {
-        const searchedFound = ingredients[j].ingredient
-          .toLowerCase()
-          .includes(valueInput.toLowerCase());
-        if (searchedFound) {
-          hasTheWantedIngredient = true;
-        }
-      }
-      // End of code for solution 1
-
-      if (
-        hasTheWantedName ||
-        hasTheWantedIngredient ||
-        hasTheWantedDescription
-      ) {
+      if (recipesFiltered) {
         recipeDom.style.display = "block";
-        recipesFiltered.push(recipe);
         this.recipesFiltered = recipesFiltered;
-      } else {
-        recipeDom.style.display = "none";
       }
-    }
+    });
+    // End of code for solution 2
 
     if (this.selectedTag.size) {
       // if there are tags selected
