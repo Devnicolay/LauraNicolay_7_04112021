@@ -59,7 +59,6 @@ export class Search {
           hasTheWantedIngredient = true;
         }
       }
-      // End of code for solution 1
 
       if (
         hasTheWantedName ||
@@ -73,6 +72,7 @@ export class Search {
         recipeDom.style.display = "none";
       }
     }
+    // End of code for solution 1
 
     if (this.selectedTag.size) {
       // if there are tags selected
