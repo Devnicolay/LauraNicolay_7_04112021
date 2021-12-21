@@ -1,7 +1,7 @@
 import { recipes } from "./data_recipes/recipes_data.js";
 import { Recipe } from "./recipes.js";
 import { Dropdown } from "./dropdown.js";
-import { Search } from "./searchBar.js";
+import { Search } from "./search.js";
 
 const ingredients = new Set();
 const appliances = new Set();

@@ -26,13 +26,13 @@ export class Dropdown {
     this.dropdown.style.maxHeight = "23em";
     this.dropdown.style.width = "100em";
     this.dropdown.style.flexGrow = "4";
-    this.filterElement();
+    this.filterElementsOfDropdown();
   }
 
   /**
    * Display filtered elements of dropdown
    */
-  filterElement() {
+  filterElementsOfDropdown() {
     let elementsFiltered = new Set();
     if (this.dataType == "ingredients") {
       this.searchBar.recipesFiltered.forEach((recipe) => {
@@ -61,7 +61,7 @@ export class Dropdown {
    * @param {string} valueInput
    * Display filtered elements of dropdown with value of input of dropdown
    */
-  filterElementsWithInput(valueInput) {
+  filterElementsWithInputOfDropdown(valueInput) {
     let elementsMatched = new Set();
     this.searchBar.recipesFiltered.forEach((recipe) => {
       if (this.dataType == "ingredients") {
@@ -188,17 +188,21 @@ export class Dropdown {
         const dataElementClicked = element.getAttribute(
           `data-${this.dataType}`
         );
-        this.createHtmlTags(dataElementClicked);
-        this.selectedTags.add(dataElementClicked.toLowerCase());
-        this.searchBar.recipesFilteredWithInput(
-          recipes,
-          this.dataType,
-          this.selectedTags
-        );
-        this.filterElement();
-        // empty searchbar of dropdown is more 3 characters and click on element on dropdown
-        if (this.input.value.length >= 3) {
-          this.input.value = "";
+        if (this.selectedTags.has(dataElementClicked.toLowerCase())) {
+          console.log("tag déjà ajouté");
+        } else {
+          this.createHtmlTags(dataElementClicked);
+          this.selectedTags.add(dataElementClicked.toLowerCase());
+          this.searchBar.recipesFilteredWithInput(
+            recipes,
+            this.dataType,
+            this.selectedTags
+          );
+          this.filterElementsOfDropdown();
+          // empty searchbar of dropdown is more 3 characters and click on element on dropdown
+          if (this.input.value.length >= 3) {
+            this.input.value = "";
+          }
         }
       });
     });
@@ -214,7 +218,7 @@ export class Dropdown {
         const valueInput = searchBar.value.toLowerCase();
         this.ul.innerHTML = "";
 
-        this.filterElementsWithInput(valueInput);
+        this.filterElementsWithInputOfDropdown(valueInput);
       } else if (e.target.value.length >= 1) {
         this.ul.innerHTML = "";
       }

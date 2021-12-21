@@ -21,6 +21,8 @@ export class Search {
     searchBar.addEventListener("keydown", (e) => {
       if (e.target.value.length >= 3) {
         this.recipesFilteredWithInput();
+      } else if (this.selectedTag) {
+        this.recipesFilteredWithInput();
       } else {
         this.displayAllRecipes();
       }
@@ -31,6 +33,7 @@ export class Search {
    * Create an array of recipes that matches with search field
    */
   recipesFilteredWithInput() {
+    // start of code for solution 1
     let recipesFiltered = [];
     const valueInput = searchBar.value.toLowerCase();
     for (let i = 0; i < recipes.length; i++) {
@@ -38,10 +41,12 @@ export class Search {
       const recipeDom = document.querySelector(
         `article[data-id="${recipe.id}"]`
       );
-      const hasTheWantedName = recipe.name.toLowerCase().includes(valueInput);
+      const hasTheWantedName = recipe.name
+        .toLowerCase()
+        .includes(valueInput.toLowerCase());
       const hasTheWantedDescription = recipe.description
         .toLowerCase()
-        .includes(valueInput);
+        .includes(valueInput.toLowerCase());
 
       const ingredients = recipe.ingredients;
 
@@ -49,11 +54,12 @@ export class Search {
       for (let j = 0; j < ingredients.length; j++) {
         const searchedFound = ingredients[j].ingredient
           .toLowerCase()
-          .includes(valueInput);
+          .includes(valueInput.toLowerCase());
         if (searchedFound) {
           hasTheWantedIngredient = true;
         }
       }
+      // End of code for solution 1
 
       if (
         hasTheWantedName ||
