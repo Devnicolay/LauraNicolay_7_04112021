@@ -1,5 +1,12 @@
 .tags-container {
   margin-top: 1em;
+  flex-wrap: wrap;
+  display: flex;
+  .tag-ingredients,
+  .tag-appliances,
+  .tag-ustensils {
+    margin: 0em 0.7em 0.7em 0em;
+  }
   .tag-ingredients {
     background-color: $ingredient-color;
   }
