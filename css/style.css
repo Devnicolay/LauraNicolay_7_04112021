@@ -11125,15 +11125,15 @@ textarea.form-control-lg {
 }
 @font-face {
   font-family: Lato_Bold;
-  src: url(/css/font/Lato/Lato-Bold.ttf);
+  src: url(./font/Lato/Lato-Bold.ttf);
 }
 @font-face {
   font-family: Lato_Light;
-  src: url(/css/font/Lato/Lato-Light.ttf);
+  src: url(./font/Lato/Lato-Light.ttf);
 }
 @font-face {
   font-family: Roboto_Regular;
-  src: url(/css/font/roboto/Roboto-Regular.ttf);
+  src: url(./font/roboto/Roboto-Regular.ttf);
 }
 body h1, body .h1 {
   font-family: DM_Sans;
@@ -11151,7 +11151,7 @@ header .banner a {
 }
 header .banner a img {
   width: 3em;
-  margin-left: 4.6em;
+  margin-left: 4em;
 }
 header .banner a h1, header .banner a .h1 {
   font-size: 1.7em;
@@ -11182,10 +11182,10 @@ header .search-bar form .button .fa-search {
   font-size: 1.4em;
 }
 
-header .nav-dropdown-container {
+header .navbar-expand .nav-dropdown-container {
   max-width: 100%;
 }
-header .nav-dropdown-container .button-tags {
+header .navbar-expand .nav-dropdown-container .button-tags {
   text-decoration: none;
   color: white;
   border: transparent;
@@ -11193,123 +11193,123 @@ header .nav-dropdown-container .button-tags {
   width: 8em;
   margin-top: 1em;
 }
-header .nav-dropdown-container .button-tags .fa-chevron-down {
+header .navbar-expand .nav-dropdown-container .button-tags .fa-chevron-down {
   margin-left: 1em;
   padding-right: 1em;
 }
-header .nav-dropdown-container .button-tags .fa-chevron-up {
+header .navbar-expand .nav-dropdown-container .button-tags .fa-chevron-up {
   margin-left: 1em;
 }
-header .nav-dropdown-ingredients,
-header .nav-dropdown-appliances,
-header .nav-dropdown-ustensils {
-  margin: 1em 2em;
+header .navbar-expand .nav-dropdown-ingredients,
+header .navbar-expand .nav-dropdown-appliances,
+header .navbar-expand .nav-dropdown-ustensils {
+  margin: 0.5em 1.5em 1.5em 0.8em;
   border-radius: 0.3em;
   max-height: 4em;
   width: 9em;
   min-width: 9em;
   overflow: scroll;
 }
-header .nav-dropdown-ingredients .button-tags,
-header .nav-dropdown-appliances .button-tags,
-header .nav-dropdown-ustensils .button-tags {
+header .navbar-expand .nav-dropdown-ingredients .button-tags,
+header .navbar-expand .nav-dropdown-appliances .button-tags,
+header .navbar-expand .nav-dropdown-ustensils .button-tags {
   display: flex;
 }
-header .nav-dropdown-ingredients .button-tags #search-ingredients,
-header .nav-dropdown-ingredients .button-tags #search-appliances,
-header .nav-dropdown-ingredients .button-tags #search-ustensils,
-header .nav-dropdown-appliances .button-tags #search-ingredients,
-header .nav-dropdown-appliances .button-tags #search-appliances,
-header .nav-dropdown-appliances .button-tags #search-ustensils,
-header .nav-dropdown-ustensils .button-tags #search-ingredients,
-header .nav-dropdown-ustensils .button-tags #search-appliances,
-header .nav-dropdown-ustensils .button-tags #search-ustensils {
+header .navbar-expand .nav-dropdown-ingredients .button-tags #search-ingredients,
+header .navbar-expand .nav-dropdown-ingredients .button-tags #search-appliances,
+header .navbar-expand .nav-dropdown-ingredients .button-tags #search-ustensils,
+header .navbar-expand .nav-dropdown-appliances .button-tags #search-ingredients,
+header .navbar-expand .nav-dropdown-appliances .button-tags #search-appliances,
+header .navbar-expand .nav-dropdown-appliances .button-tags #search-ustensils,
+header .navbar-expand .nav-dropdown-ustensils .button-tags #search-ingredients,
+header .navbar-expand .nav-dropdown-ustensils .button-tags #search-appliances,
+header .navbar-expand .nav-dropdown-ustensils .button-tags #search-ustensils {
   border: none;
   display: none;
   color: white;
 }
-header .nav-dropdown-ingredients .button-tags #search-ingredients::placeholder,
-header .nav-dropdown-ingredients .button-tags #search-appliances::placeholder,
-header .nav-dropdown-ingredients .button-tags #search-ustensils::placeholder,
-header .nav-dropdown-appliances .button-tags #search-ingredients::placeholder,
-header .nav-dropdown-appliances .button-tags #search-appliances::placeholder,
-header .nav-dropdown-appliances .button-tags #search-ustensils::placeholder,
-header .nav-dropdown-ustensils .button-tags #search-ingredients::placeholder,
-header .nav-dropdown-ustensils .button-tags #search-appliances::placeholder,
-header .nav-dropdown-ustensils .button-tags #search-ustensils::placeholder {
+header .navbar-expand .nav-dropdown-ingredients .button-tags #search-ingredients::placeholder,
+header .navbar-expand .nav-dropdown-ingredients .button-tags #search-appliances::placeholder,
+header .navbar-expand .nav-dropdown-ingredients .button-tags #search-ustensils::placeholder,
+header .navbar-expand .nav-dropdown-appliances .button-tags #search-ingredients::placeholder,
+header .navbar-expand .nav-dropdown-appliances .button-tags #search-appliances::placeholder,
+header .navbar-expand .nav-dropdown-appliances .button-tags #search-ustensils::placeholder,
+header .navbar-expand .nav-dropdown-ustensils .button-tags #search-ingredients::placeholder,
+header .navbar-expand .nav-dropdown-ustensils .button-tags #search-appliances::placeholder,
+header .navbar-expand .nav-dropdown-ustensils .button-tags #search-ustensils::placeholder {
   color: white;
   opacity: 0.5;
 }
-header .nav-dropdown-ingredients .nav-list-ingredients,
-header .nav-dropdown-ingredients .nav-list-appliances,
-header .nav-dropdown-ingredients .nav-list-ustensils,
-header .nav-dropdown-appliances .nav-list-ingredients,
-header .nav-dropdown-appliances .nav-list-appliances,
-header .nav-dropdown-appliances .nav-list-ustensils,
-header .nav-dropdown-ustensils .nav-list-ingredients,
-header .nav-dropdown-ustensils .nav-list-appliances,
-header .nav-dropdown-ustensils .nav-list-ustensils {
+header .navbar-expand .nav-dropdown-ingredients .nav-list-ingredients,
+header .navbar-expand .nav-dropdown-ingredients .nav-list-appliances,
+header .navbar-expand .nav-dropdown-ingredients .nav-list-ustensils,
+header .navbar-expand .nav-dropdown-appliances .nav-list-ingredients,
+header .navbar-expand .nav-dropdown-appliances .nav-list-appliances,
+header .navbar-expand .nav-dropdown-appliances .nav-list-ustensils,
+header .navbar-expand .nav-dropdown-ustensils .nav-list-ingredients,
+header .navbar-expand .nav-dropdown-ustensils .nav-list-appliances,
+header .navbar-expand .nav-dropdown-ustensils .nav-list-ustensils {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr;
   gap: 0.5em 1em;
 }
-header .nav-dropdown-ingredients .nav-list-ingredients .li-ingredients,
-header .nav-dropdown-ingredients .nav-list-ingredients .li-appliances,
-header .nav-dropdown-ingredients .nav-list-ingredients .li-ustensils,
-header .nav-dropdown-ingredients .nav-list-appliances .li-ingredients,
-header .nav-dropdown-ingredients .nav-list-appliances .li-appliances,
-header .nav-dropdown-ingredients .nav-list-appliances .li-ustensils,
-header .nav-dropdown-ingredients .nav-list-ustensils .li-ingredients,
-header .nav-dropdown-ingredients .nav-list-ustensils .li-appliances,
-header .nav-dropdown-ingredients .nav-list-ustensils .li-ustensils,
-header .nav-dropdown-appliances .nav-list-ingredients .li-ingredients,
-header .nav-dropdown-appliances .nav-list-ingredients .li-appliances,
-header .nav-dropdown-appliances .nav-list-ingredients .li-ustensils,
-header .nav-dropdown-appliances .nav-list-appliances .li-ingredients,
-header .nav-dropdown-appliances .nav-list-appliances .li-appliances,
-header .nav-dropdown-appliances .nav-list-appliances .li-ustensils,
-header .nav-dropdown-appliances .nav-list-ustensils .li-ingredients,
-header .nav-dropdown-appliances .nav-list-ustensils .li-appliances,
-header .nav-dropdown-appliances .nav-list-ustensils .li-ustensils,
-header .nav-dropdown-ustensils .nav-list-ingredients .li-ingredients,
-header .nav-dropdown-ustensils .nav-list-ingredients .li-appliances,
-header .nav-dropdown-ustensils .nav-list-ingredients .li-ustensils,
-header .nav-dropdown-ustensils .nav-list-appliances .li-ingredients,
-header .nav-dropdown-ustensils .nav-list-appliances .li-appliances,
-header .nav-dropdown-ustensils .nav-list-appliances .li-ustensils,
-header .nav-dropdown-ustensils .nav-list-ustensils .li-ingredients,
-header .nav-dropdown-ustensils .nav-list-ustensils .li-appliances,
-header .nav-dropdown-ustensils .nav-list-ustensils .li-ustensils {
+header .navbar-expand .nav-dropdown-ingredients .nav-list-ingredients .li-ingredients,
+header .navbar-expand .nav-dropdown-ingredients .nav-list-ingredients .li-appliances,
+header .navbar-expand .nav-dropdown-ingredients .nav-list-ingredients .li-ustensils,
+header .navbar-expand .nav-dropdown-ingredients .nav-list-appliances .li-ingredients,
+header .navbar-expand .nav-dropdown-ingredients .nav-list-appliances .li-appliances,
+header .navbar-expand .nav-dropdown-ingredients .nav-list-appliances .li-ustensils,
+header .navbar-expand .nav-dropdown-ingredients .nav-list-ustensils .li-ingredients,
+header .navbar-expand .nav-dropdown-ingredients .nav-list-ustensils .li-appliances,
+header .navbar-expand .nav-dropdown-ingredients .nav-list-ustensils .li-ustensils,
+header .navbar-expand .nav-dropdown-appliances .nav-list-ingredients .li-ingredients,
+header .navbar-expand .nav-dropdown-appliances .nav-list-ingredients .li-appliances,
+header .navbar-expand .nav-dropdown-appliances .nav-list-ingredients .li-ustensils,
+header .navbar-expand .nav-dropdown-appliances .nav-list-appliances .li-ingredients,
+header .navbar-expand .nav-dropdown-appliances .nav-list-appliances .li-appliances,
+header .navbar-expand .nav-dropdown-appliances .nav-list-appliances .li-ustensils,
+header .navbar-expand .nav-dropdown-appliances .nav-list-ustensils .li-ingredients,
+header .navbar-expand .nav-dropdown-appliances .nav-list-ustensils .li-appliances,
+header .navbar-expand .nav-dropdown-appliances .nav-list-ustensils .li-ustensils,
+header .navbar-expand .nav-dropdown-ustensils .nav-list-ingredients .li-ingredients,
+header .navbar-expand .nav-dropdown-ustensils .nav-list-ingredients .li-appliances,
+header .navbar-expand .nav-dropdown-ustensils .nav-list-ingredients .li-ustensils,
+header .navbar-expand .nav-dropdown-ustensils .nav-list-appliances .li-ingredients,
+header .navbar-expand .nav-dropdown-ustensils .nav-list-appliances .li-appliances,
+header .navbar-expand .nav-dropdown-ustensils .nav-list-appliances .li-ustensils,
+header .navbar-expand .nav-dropdown-ustensils .nav-list-ustensils .li-ingredients,
+header .navbar-expand .nav-dropdown-ustensils .nav-list-ustensils .li-appliances,
+header .navbar-expand .nav-dropdown-ustensils .nav-list-ustensils .li-ustensils {
   color: white;
   list-style: none;
   cursor: pointer;
 }
-header .nav-dropdown-ingredients {
+header .navbar-expand .nav-dropdown-ingredients {
   background-color: #3282f7;
 }
-header .nav-dropdown-ingredients .button-tags {
+header .navbar-expand .nav-dropdown-ingredients .button-tags {
   background-color: #3282f7;
 }
-header .nav-dropdown-ingredients .button-tags #search-ingredients {
+header .navbar-expand .nav-dropdown-ingredients .button-tags #search-ingredients {
   background-color: #3282f7;
 }
-header .nav-dropdown-appliances {
+header .navbar-expand .nav-dropdown-appliances {
   background-color: #68d9a4;
 }
-header .nav-dropdown-appliances .button-tags {
+header .navbar-expand .nav-dropdown-appliances .button-tags {
   background-color: #68d9a4;
 }
-header .nav-dropdown-appliances .button-tags #search-appliances {
+header .navbar-expand .nav-dropdown-appliances .button-tags #search-appliances {
   background-color: #68d9a4;
 }
-header .nav-dropdown-ustensils {
+header .navbar-expand .nav-dropdown-ustensils {
   background-color: #ed6454;
 }
-header .nav-dropdown-ustensils .button-tags {
+header .navbar-expand .nav-dropdown-ustensils .button-tags {
   background-color: #ed6454;
 }
-header .nav-dropdown-ustensils .button-tags #search-ustensils {
+header .navbar-expand .nav-dropdown-ustensils .button-tags #search-ustensils {
   background-color: #ed6454;
 }
 
@@ -11407,6 +11407,13 @@ main .part-recipes article .ingredients-and-description .description {
 
 .tags-container {
   margin-top: 1em;
+  flex-wrap: wrap;
+  display: flex;
+}
+.tags-container .tag-ingredients,
+.tags-container .tag-appliances,
+.tags-container .tag-ustensils {
+  margin: 0em 0.7em 0.7em 0em;
 }
 .tags-container .tag-ingredients {
   background-color: #3282f7;
