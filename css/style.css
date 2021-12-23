@@ -11171,6 +11171,7 @@ header .search-bar form #research {
   padding-left: 0.5em;
   font-size: 0.9em;
   outline: none;
+  border-radius: 0.3em;
 }
 header .search-bar form .button {
   border: none;
