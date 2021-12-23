@@ -38,7 +38,7 @@ Il faudra proposer 2 versions différentes de l'algorithme et choisir la plus pe
 
 ### Algorigramme
 
-![alt tag](./images/algorigramme.png)
+![alt tag](./images/Algorigramme.png)
 
 ### Recherche de recettes de cuisine
 
