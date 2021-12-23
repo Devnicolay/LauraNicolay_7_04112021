@@ -18,8 +18,10 @@ export class Search {
    * Listeners
    */
   initListeners() {
-    searchBar.addEventListener("keydown", (e) => {
+    searchBar.addEventListener("keyup", (e) => {
       if (e.target.value.length >= 3) {
+        this.recipesFilteredWithInput();
+      } else if (e.target == "Backspace") {
         this.recipesFilteredWithInput();
       } else if (this.selectedTag) {
         this.recipesFilteredWithInput();
