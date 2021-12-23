@@ -36,6 +36,10 @@ Il faudra proposer 2 versions différentes de l'algorithme et choisir la plus pe
 - Possibilité d'utiliser Bootstrap
 - Vérification du site au validateur W3C
 
+### Algorigramme
+
+![alt tag](./images/algorigramme.png)
+
 ### Recherche de recettes de cuisine
 
 - Dans le champs de recherche principal : recherche par nom ou par description ou par ingrédients
